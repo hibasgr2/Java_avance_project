@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+
+        <!-- Connexion à la base de données -->
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">
+            jdbc:mysql://localhost:3306/projet_java_rs?useSSL=false&amp;serverTimezone=UTC
+        </property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property> <!-- vide si pas de mot de passe -->
+
+        <!--        <property name="hibernate.connection.password"/>-->
+
+        <!-- Dialecte SQL -->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+        <!-- IMPORTANT : Désactivez le storage engine -->
+        <property name="hibernate.dialect.storage_engine">innodb</property>
+
+        <!-- Gestion des sessions -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Crée/actualise les tables automatiquement -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <!-- Encodage -->
+        <property name="hibernate.connection.characterEncoding">utf8</property>
+        <property name="hibernate.connection.CharSet">utf8</property>
+        <property name="hibernate.connection.useUnicode">true</property>
+
+        <!-- Classes mappées -->
+        <mapping class="reservation.reservation.model.Utilisateur"/>
+        <mapping class="reservation.reservation.model.Client"/>
+        <mapping class="reservation.reservation.model.Respo"/>
+        <mapping class="reservation.reservation.model.SupUser"/>
+        <mapping class="reservation.reservation.model.Etage"/>
+        <mapping class="reservation.reservation.model.Immeuble"/>
+        <mapping class="reservation.reservation.model.Salle"/>
+        <mapping class="reservation.reservation.model.Reservation"/>
+
+
+
+
+    </session-factory>
+</hibernate-configuration>
