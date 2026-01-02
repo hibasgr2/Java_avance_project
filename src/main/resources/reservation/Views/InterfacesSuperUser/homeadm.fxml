@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="reservation.reservation.controller.AdminController"
+      prefHeight="600.0" prefWidth="900.0"
+      style="-fx-background-color: #ffffff;">
+
+    <!-- Header -->
+    <HBox style="-fx-background-color: #000B58; -fx-padding: 15px;"
+          alignment="CENTER_LEFT">
+        <Label text="Super User Dashboard"
+               style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+    </HBox>
+
+    <!-- Main Content Area -->
+    <HBox VBox.vgrow="ALWAYS">
+
+        <!-- Sidebar -->
+        <VBox style="-fx-background-color: #003161; -fx-padding: 20px;"
+              prefWidth="200" minWidth="200">
+
+            <Label text="NAVIGATION"
+                   style="-fx-text-fill: #FDEB9E; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 0 0 15 0;"/>
+            <VBox spacing="10">
+                <Button  text="Salles"
+                        style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12px; -fx-background-radius: 5;"
+                        maxWidth="Infinity">
+                    <padding>
+                        <Insets left="15" />
+                    </padding>
+                </Button>
+                <Button onAction="#redirectToAddRespo" text="Responsables"
+                        style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12px; -fx-background-radius: 5;"
+                        maxWidth="Infinity">
+                    <padding>
+                        <Insets left="15" />
+                    </padding>
+                </Button>
+
+                <!-- Affectation Respo Etage -->
+                <Button text="Affectation Respo Étage"
+                        style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12px; -fx-background-radius: 5;"
+                        maxWidth="Infinity">
+                    <padding>
+                        <Insets left="15" />
+                    </padding>
+                </Button>
+
+                <!-- Statistiques -->
+                <Button text="Statistiques"
+                        style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 12px; -fx-background-radius: 5;"
+                        maxWidth="Infinity">
+                    <padding>
+                        <Insets left="15" />
+                    </padding>
+                </Button>
+            </VBox>
+
+            <!-- Spacer pour pousser le contenu vers le haut -->
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <!-- Footer de la sidebar -->
+            <VBox spacing="5" style="-fx-padding: 20 0 0 0;">
+                <Separator style="-fx-background-color: #006A67;" />
+                <Label text="Version 1.0"
+                       style="-fx-text-fill: #FDEB9E; -fx-font-size: 12px; -fx-opacity: 0.8;"/>
+            </VBox>
+        </VBox>
+
+        <!-- Content Area -->
+        <VBox VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS"
+              style="-fx-padding: 30px; -fx-background-color: #f5f5f5;">
+
+            <Label fx:id="nomRespo"
+                   style="-fx-font-size: 24px; -fx-text-fill: #003161; -fx-font-weight: bold; -fx-padding: 0 0 20 0;"/>
+
+            <TextFlow style="-fx-padding: 0 0 30 0;">
+                <Text text="Sélectionnez une option dans la sidebar pour commencer."
+                      style="-fx-font-size: 16px; -fx-fill: #666666;"/>
+            </TextFlow>
+
+            <!-- Cards pour statistiques rapides -->
+            <GridPane hgap="20" vgap="20">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints percentHeight="50" />
+                    <RowConstraints percentHeight="50" />
+                </rowConstraints>
+
+                <!-- Card 1 -->
+                <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      GridPane.columnIndex="0" GridPane.rowIndex="0">
+                    <Label text="Salles"
+                           style="-fx-font-size: 18px; -fx-text-fill: #006A67; -fx-font-weight: bold;"/>
+                    <Label text="24"
+                           style="-fx-font-size: 36px; -fx-text-fill: #003161; -fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+                </VBox>
+
+                <!-- Card 2 -->
+                <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      GridPane.columnIndex="1" GridPane.rowIndex="0">
+                    <Label text="Responsables"
+                           style="-fx-font-size: 18px; -fx-text-fill: #006A67; -fx-font-weight: bold;"/>
+                    <Label text="8"
+                           style="-fx-font-size: 36px; -fx-text-fill: #003161; -fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+                </VBox>
+
+                <!-- Card 3 -->
+                <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      GridPane.columnIndex="0" GridPane.rowIndex="1">
+                    <Label text="Étages"
+                           style="-fx-font-size: 18px; -fx-text-fill: #006A67; -fx-font-weight: bold;"/>
+                    <Label text="5"
+                           style="-fx-font-size: 36px; -fx-text-fill: #003161; -fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+                </VBox>
+
+                <!-- Card 4 -->
+                <VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);"
+                      GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <Label text="Taux d'occupation"
+                           style="-fx-font-size: 18px; -fx-text-fill: #006A67; -fx-font-weight: bold;"/>
+                    <Label text="78%"
+                           style="-fx-font-size: 36px; -fx-text-fill: #003161; -fx-font-weight: bold; -fx-padding: 10 0 0 0;"/>
+                </VBox>
+            </GridPane>
+        </VBox>
+    </HBox>
+</VBox>

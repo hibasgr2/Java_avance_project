@@ -28,7 +28,7 @@ public class UtilisateurController {
     }
 
     // Supprimer un utilisateur par id
-    public void supprimerUtilisateur(int id) {
+    public void supprimerUtilisateur(Long id) {
         utilisateurDAO.delete(id);
     }
 

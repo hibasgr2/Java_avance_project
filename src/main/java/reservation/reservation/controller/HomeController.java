@@ -77,4 +77,6 @@ public class HomeController {
         // Logique pour afficher les paramètres
         System.out.println("Affichage des paramètres");
     }
+
+
 }

@@ -8,7 +8,7 @@ public class TestConnexionSimple {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/projet_java_rs?useSSL=false&serverTimezone=UTC";
         String user = "root";
-        String password = "root"; // Remplacez par votre mot de passe
+        String password = "";
 
         System.out.println("Test de connexion à : " + url);
 

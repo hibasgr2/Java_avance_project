@@ -9,14 +9,7 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "utilisateur_id")
 public class Respo extends Utilisateur {
 
-    @Id
-    @Column(name = "utilisateur_id")
-    private Long id;
 
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "utilisateur_id")
-    private Utilisateur utilisateur;
 
     @Column(name = "actif", nullable = false)
     private boolean actif = true;
@@ -38,8 +31,8 @@ public class Respo extends Utilisateur {
         this.actif = true;
     }
 
-    public Respo(String nomComplet, String tel, String email,
-                 String password, boolean actif) {
+
+    public Respo(String nomComplet, String tel, String email,String password, boolean actif) {
         super(nomComplet, tel, email, password,Role.RESPO);
         this.actif = actif;
     }
@@ -49,6 +42,8 @@ public class Respo extends Utilisateur {
     public Role getRole() {
         return Role.RESPO;  // Rôle fixe pour Respo
     }
+
+
 
     // Getters et Setters
     public boolean isActif() {
@@ -101,4 +96,7 @@ public class Respo extends Utilisateur {
     public int getNombreSalles() {
         return salles.size();
     }
+
+
+
 }

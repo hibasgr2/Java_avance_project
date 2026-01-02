@@ -12,7 +12,7 @@
             jdbc:mysql://localhost:3306/projet_java_rs?useSSL=false&amp;serverTimezone=UTC
         </property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property> <!-- vide si pas de mot de passe -->
+        <property name="hibernate.connection.password"></property> <!-- vide si pas de mot de passe -->
 
         <!--        <property name="hibernate.connection.password"/>-->
 
@@ -43,9 +43,5 @@
         <mapping class="reservation.reservation.model.Immeuble"/>
         <mapping class="reservation.reservation.model.Salle"/>
         <mapping class="reservation.reservation.model.Reservation"/>
-
-
-
-
     </session-factory>
 </hibernate-configuration>

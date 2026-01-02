@@ -2,6 +2,7 @@ package reservation.reservation.dao;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import reservation.reservation.model.SupUser;
 import reservation.reservation.model.Utilisateur;
 
 public class UtilisateurDAO {
@@ -30,6 +31,7 @@ public class UtilisateurDAO {
         }
     }
 
+
     public void update(Utilisateur utilisateur) {
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSession()) {
@@ -42,11 +44,14 @@ public class UtilisateurDAO {
         }
     }
 
-    public void delete(int id) {
+    public void delete(Long id) {
+        Session session = null;
         Transaction transaction = null;
-        try (Session session = HibernateUtil.getSession()) {
+        try  {
+            session = HibernateUtil.getSessionFactory().openSession();
             transaction = session.beginTransaction();
             Utilisateur utilisateur = session.get(Utilisateur.class, id);
+            System.out.println("hada howa l user li l9ina "+utilisateur.getId());
             if (utilisateur != null) {
                 session.delete(utilisateur);
             }
@@ -77,5 +82,6 @@ public class UtilisateurDAO {
                     ).setParameter("email", email)
                     .uniqueResult();
         }
+
     }
 }
