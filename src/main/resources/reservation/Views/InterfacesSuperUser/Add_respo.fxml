@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="reservation.reservation.controller.AdminController"
+      prefHeight="500.0" prefWidth="600.0"
+      style="-fx-background-color: #ffffff; -fx-padding: 20;">
+
+    <!-- Header -->
+    <HBox style="-fx-background-color: #000B58; -fx-background-radius: 10 10 0 0; -fx-padding: 15px;"
+          alignment="CENTER">
+        <Label text="Ajouter un Responsable"
+               style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- Formulaire -->
+    <VBox style="-fx-background-color: #f5f5f5; -fx-background-radius: 0 0 10 10; -fx-padding: 30;"
+          spacing="20">
+
+        <!-- Champ Nom -->
+        <VBox spacing="5">
+            <Label text="Nom Complet *"
+                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <TextField fx:id="nomField"
+                       style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"
+                       promptText="Entrez le nom complet"/>
+        </VBox>
+
+        <!-- Champ Téléphone -->
+        <VBox spacing="5">
+            <Label text="Numéro de Téléphone *"
+                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <TextField fx:id="telField"
+                       style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"
+                       promptText="Entrez le numéro de téléphone"/>
+        </VBox>
+
+        <!-- Champ Email -->
+        <VBox spacing="5">
+            <Label text="Adresse Email *"
+                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <TextField fx:id="emailField"
+                       style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"
+                       promptText="Entrez l'adresse email"/>
+        </VBox>
+
+        <!-- Champ Mot de passe -->
+        <VBox spacing="5">
+            <Label text="Mot de Passe *"
+                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <PasswordField fx:id="passwordField"
+                           style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"
+                           promptText="Entrez le mot de passe"/>
+            <Label text="Le mot de passe doit contenir au moins 8 caractères"
+                   style="-fx-text-fill: #666666; -fx-font-size: 12px; -fx-font-style: italic;"/>
+        </VBox>
+
+        <!-- Boutons d'action -->
+        <HBox spacing="15" style="-fx-padding: 20 0 0 0;" alignment="CENTER_RIGHT">
+            <Button text="Retour"
+                    style="-fx-background-color: #cccccc; -fx-text-fill: #333333; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5;"
+                    onAction="#redirectToDashboard">
+            </Button>
+
+            <Button text="Ajouter Responsable"
+                    style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 25; -fx-background-radius: 5;"
+                    onAction="#AddRespo">
+<!--                <cursor>-->
+<!--                    <Cursor fx:constant="HAND"/>-->
+<!--                </cursor>-->
+            </Button>
+        </HBox>
+
+        <!-- Message d'information -->
+        <VBox style="-fx-background-color: #FDEB9E; -fx-background-radius: 5; -fx-padding: 10; -fx-margin: 10 0 0 0;">
+            <Label text="Information"
+                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+            <Label text="Tous les champs marqués d'un astérisque (*) sont obligatoires."
+                   style="-fx-text-fill: #003161; -fx-font-size: 13px; -fx-wrap-text: true;"/>
+        </VBox>
+    </VBox>
+
+    <!-- Footer -->
+    <HBox style="-fx-padding: 15 0 0 0;" alignment="CENTER">
+        <Label text="Super User Panel" style="-fx-text-fill: #003161; -fx-font-size: 12px; -fx-opacity: 0.7;"/>
+    </HBox>
+</VBox>
