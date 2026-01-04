@@ -49,12 +49,18 @@
     <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.utilisateur" active-filter-id="be64ad8a-cacd-4829-a6e1-d990aa56edbc">
       <filter id="be64ad8a-cacd-4829-a6e1-d990aa56edbc" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.immeuble" active-filter-id="095063fe-5b1a-4c33-a483-bc49c3f90075">
+      <filter id="095063fe-5b1a-4c33-a483-bc49c3f90075" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
     <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.salle" active-filter-id="05cf220a-6724-4873-af18-a92d3e623daf">
       <filter id="05cf220a-6724-4873-af18-a92d3e623daf" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
     <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.reservation" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.client" active-filter-id="2173cb1f-265c-4427-8ff4-745fc9e7b6c2">
       <filter id="2173cb1f-265c-4427-8ff4-745fc9e7b6c2" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.etage" active-filter-id="8281f8df-524b-4123-8fdb-43cb1b3a2d59">
+      <filter id="8281f8df-524b-4123-8fdb-43cb1b3a2d59" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
     <filter-actions connection-id="cc190196-7307-4781-a32a-2e64415e6348" dataset="projet_java_rs.respo" active-filter-id="0138c1b7-814e-49e4-ad25-71088c5b48c4">
       <filter id="0138c1b7-814e-49e4-ad25-71088c5b48c4" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
@@ -75,7 +81,7 @@
           <description value="" />
           <database-type value="MYSQL" />
           <config-type value="BASIC" />
-          <database-version value="9.1" />
+          <database-version value="5.5" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />

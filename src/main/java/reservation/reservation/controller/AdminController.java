@@ -147,9 +147,33 @@ public class AdminController {
                     editBtn.setStyle("-fx-background-color: #003161; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 5 10;");
                     deleteBtn.setStyle("-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 12px; -fx-padding: 5 10;");
                     editBtn.setOnAction(event -> {
-                        Utilisateur user = getTableView().getItems().get(getIndex());
-                        userC.mettreAJourUtilisateur(user);
+                        try {
+                            // Récupérer l'utilisateur
+                            Respo user = getTableView().getItems().get(getIndex());
 
+                            FXMLLoader loader = new FXMLLoader(
+                                    getClass().getResource("/reservation/Views/InterfacesSuperUser/modify_respo.fxml")
+                            );
+                            Parent root = loader.load();
+                            AdminController modalController = loader.getController();
+                            modalController.nomField.setText(user.getNomComplet());
+                            modalController.emailField.setText(user.getEmail());
+                            modalController.telField.setText(user.getTel());
+                            modalController.passwordField.setText("");
+                            Stage modalStage = new Stage();
+                            Scene scene = new Scene(root);
+                            modalStage.setTitle("Modifier un Responsable");
+                            modalStage.initModality(Modality.APPLICATION_MODAL);
+                            modalStage.setScene(scene);
+                            modalStage.setWidth(600);
+                            modalStage.setHeight(650);
+                            modalStage.centerOnScreen();
+                            modalStage.showAndWait();
+                            listRespos();
+                        } catch (Exception e){
+                            System.out.println("erreur : " + e.getMessage());
+                            e.printStackTrace();
+                        }
                     });
                     deleteBtn.setOnAction(event -> {
 
@@ -191,5 +215,15 @@ public class AdminController {
                                 (e.getEmail().contains(infosRespo.getText()))
                 ).collect(java.util.stream.Collectors.toList());
         respoTable.getItems().setAll(resultats);
+    }
+
+    public void modifierRespo(){
+        Utilisateur user = userC.getUtilisateurParEmail(emailField.getText());
+        user.setNomComplet(nomField.getText());
+        user.setEmail(nomField.getText());
+        user.setTel(telField.getText());
+        if (passwordField.getText() != null)
+            user.setPassword(PasswordUtil.hashPassword(passwordField.getText()));
+        userC.mettreAJourUtilisateur(user);
     }
 }

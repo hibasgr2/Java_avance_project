@@ -42,5 +42,7 @@ public class UtilisateurController {
         return utilisateurDAO.getById(id);
     }
 
-
+    public Utilisateur getUtilisateurParEmail(String email) {
+        return utilisateurDAO.findByEmail(email);
+    }
 }
