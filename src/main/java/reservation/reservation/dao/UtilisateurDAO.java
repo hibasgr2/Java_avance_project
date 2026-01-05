@@ -62,7 +62,7 @@ public class UtilisateurDAO {
         }
     }
 
-    public Utilisateur getById(int id) {
+    public Utilisateur getById(long id) {
         try (Session session = HibernateUtil.getSession()) {
             return session.get(Utilisateur.class, id);
         }

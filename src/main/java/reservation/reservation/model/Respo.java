@@ -9,8 +9,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "utilisateur_id")
 public class Respo extends Utilisateur {
 
-
-
     @Column(name = "actif", nullable = false)
     private boolean actif = true;
 

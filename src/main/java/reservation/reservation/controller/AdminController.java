@@ -32,7 +32,7 @@ public class AdminController {
     private TextField nomField;
     @FXML
     private TextField telField;
-
+    @FXML private TextField hiddenIdField;
     @FXML
     private TextField infosRespo;
     @FXML private Label activeLabel;
@@ -160,6 +160,7 @@ public class AdminController {
                             modalController.emailField.setText(user.getEmail());
                             modalController.telField.setText(user.getTel());
                             modalController.passwordField.setText("");
+                            modalController.hiddenIdField.setText(user.getId().toString());
                             Stage modalStage = new Stage();
                             Scene scene = new Scene(root);
                             modalStage.setTitle("Modifier un Responsable");
@@ -218,12 +219,24 @@ public class AdminController {
     }
 
     public void modifierRespo(){
-        Utilisateur user = userC.getUtilisateurParEmail(emailField.getText());
-        user.setNomComplet(nomField.getText());
-        user.setEmail(nomField.getText());
-        user.setTel(telField.getText());
-        if (passwordField.getText() != null)
-            user.setPassword(PasswordUtil.hashPassword(passwordField.getText()));
-        userC.mettreAJourUtilisateur(user);
+        try{
+            String idText = hiddenIdField.getText();
+            Utilisateur user = userC.getUtilisateurParId(Long.parseLong(idText.trim()));
+            System.out.println("user li l9ina howa "+user.getId());
+            System.out.println("user li l9ina howa "+user.getEmail());System.out.println("user li l9ina howa "+user.getTel());
+            System.out.println("user li l9ina howa "+user.getNomComplet());
+            if (user != null){
+                user.setNomComplet(nomField.getText());
+                user.setEmail(emailField.getText());
+                user.setTel(telField.getText());
+                if (passwordField.getText() != null)
+                    user.setPassword(PasswordUtil.hashPassword(passwordField.getText()));
+                userC.mettreAJourUtilisateur(user);
+            }
+            System.out.println(hiddenIdField.getText());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 }

@@ -23,6 +23,7 @@
           spacing="20">
 
         <!-- Champ Nom -->
+        <TextField fx:id="hiddenIdField" visible="false"/>
         <VBox spacing="5">
             <Label text="Nom Complet *"
                    style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>

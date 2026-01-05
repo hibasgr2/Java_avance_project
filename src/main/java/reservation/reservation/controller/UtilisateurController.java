@@ -38,7 +38,7 @@ public class UtilisateurController {
     }
 
     // Récupérer un utilisateur par id
-    public Utilisateur getUtilisateurParId(int id) {
+    public Utilisateur getUtilisateurParId(long id) {
         return utilisateurDAO.getById(id);
     }
 
