@@ -39,6 +39,17 @@ public class Etage {
     public Respo getRespo() { return respo; }
     public void setRespo(Respo respo) { this.respo = respo; }
 
+    public Immeuble getImmeuble() {
+        return this.immeuble;  // Doit exister
+    }
+    public void setImmeuble(Immeuble immeuble) {
+        this.immeuble = immeuble;
+    }
     public List<Salle> getSalles() { return salles; }
     public void setSalles(List<Salle> salles) { this.salles = salles; }
+
+    @Override
+    public String toString() {
+        return "Étage " + id;
+    }
 }

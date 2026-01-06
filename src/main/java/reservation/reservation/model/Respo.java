@@ -9,15 +9,6 @@ import java.util.List;
 @PrimaryKeyJoinColumn(name = "utilisateur_id")
 public class Respo extends Utilisateur {
 
-    @Id
-    @Column(name = "utilisateur_id")
-    private Long id;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "utilisateur_id")
-    private Utilisateur utilisateur;
-
     @Column(name = "actif", nullable = false)
     private boolean actif = true;
 

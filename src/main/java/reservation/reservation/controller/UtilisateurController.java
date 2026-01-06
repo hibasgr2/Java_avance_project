@@ -28,7 +28,7 @@ public class UtilisateurController {
     }
 
     // Supprimer un utilisateur par id
-    public void supprimerUtilisateur(int id) {
+    public void supprimerUtilisateur(Long id) {
         utilisateurDAO.delete(id);
     }
 
@@ -42,5 +42,7 @@ public class UtilisateurController {
         return utilisateurDAO.getById(id);
     }
 
-
+    public Utilisateur getUtilisateurParEmail(String email) {
+        return utilisateurDAO.findByEmail(email);
+    }
 }

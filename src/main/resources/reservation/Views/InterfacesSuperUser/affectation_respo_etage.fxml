@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="reservation.reservation.controller.AffectationRespoEtageController"
+      prefHeight="500.0" prefWidth="800.0"
+      style="-fx-background-color: #ffffff; -fx-padding: 20px;"
+      spacing="20">
+
+    <!-- Header -->
+    <Label text="Affectation Responsable à un Étage"
+           style="-fx-font-size: 24px; -fx-text-fill: #003161; -fx-font-weight: bold;"/>
+
+    <!-- Formulaire -->
+    <VBox style="-fx-background-color: #f9f9f9; -fx-padding: 30px; -fx-background-radius: 10;"
+          spacing="15">
+
+        <!-- Immeuble -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Immeuble :"
+                   style="-fx-font-size: 14px; -fx-text-fill: #003161; -fx-min-width: 150;"/>
+            <ComboBox fx:id="immeubleComboBox"
+                      prefWidth="300"
+                      promptText="Sélectionner un immeuble"
+                      style="-fx-font-size: 14px;"/>
+        </HBox>
+
+        <!-- Étage -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Étage :"
+                   style="-fx-font-size: 14px; -fx-text-fill: #003161; -fx-min-width: 150;"/>
+            <ComboBox fx:id="etageComboBox"
+                      prefWidth="300"
+                      promptText="Sélectionner un étage"
+                      style="-fx-font-size: 14px;"/>
+        </HBox>
+
+        <!-- Responsable -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Responsable :"
+                   style="-fx-font-size: 14px; -fx-text-fill: #003161; -fx-min-width: 150;"/>
+            <ComboBox fx:id="respoComboBox"
+                      prefWidth="300"
+                      promptText="Sélectionner un responsable"
+                      style="-fx-font-size: 14px;"/>
+        </HBox>
+
+        <!-- Responsable actuel -->
+        <HBox spacing="10" alignment="CENTER_LEFT">
+            <Label text="Responsable actuel :"
+                   style="-fx-font-size: 14px; -fx-text-fill: #003161; -fx-min-width: 150;"/>
+            <Label fx:id="respoActuelLabel"
+                   style="-fx-font-size: 14px; -fx-text-fill: #666666; -fx-font-style: italic;"/>
+        </HBox>
+
+        <!-- Boutons -->
+        <HBox spacing="15" alignment="CENTER_RIGHT" style="-fx-padding: 20 0 0 0;">
+            <Button text="Annuler"
+                    onAction="#annuler"
+                    style="-fx-background-color: #999999; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+            <Button text="Affecter"
+                    onAction="#affecterRespoAetage"
+                    style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20;"/>
+        </HBox>
+    </VBox>
+
+    <!-- Tableau des affectations existantes -->
+    <VBox spacing="10">
+        <Label text="Affectations existantes"
+               style="-fx-font-size: 18px; -fx-text-fill: #003161; -fx-font-weight: bold;"/>
+
+        <TableView fx:id="affectationTable" prefHeight="200">
+            <columns>
+                <TableColumn text="Immeuble" prefWidth="200">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="immeubleAdresse" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Étage" prefWidth="100">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="etageId" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Responsable" prefWidth="250">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="respoNom" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+</VBox>

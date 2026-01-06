@@ -3,6 +3,7 @@ package reservation.reservation.test;
 import reservation.reservation.dao.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import reservation.reservation.model.SupUser;
 import reservation.reservation.util.PasswordUtil;
 
 
@@ -50,6 +51,17 @@ public class CreationTabs  {
             // Exécuter une requête simple pour déclencher la création des tables
             session.createNativeQuery("SELECT 1").getResultList();
 
+            PasswordUtil pass = new PasswordUtil();
+
+            System.out.println("👤 Création d'un SuperUser...");
+            SupUser superUser = new SupUser(
+                    "Admin Principal",
+                    "0612345678",
+                    "admin@reservation.com",
+                    PasswordUtil.hashPassword("admin123")
+
+            );
+            session.persist(superUser);
             transaction.commit();
             System.out.println("✅ Tables créées avec succès !");
 
@@ -96,4 +108,3 @@ public class CreationTabs  {
 //    }
 
 }
-
