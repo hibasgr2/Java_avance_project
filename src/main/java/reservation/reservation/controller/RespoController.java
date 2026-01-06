@@ -1,13 +1,8 @@
 package reservation.reservation.controller;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import reservation.reservation.dao.EtageDAO;
-import reservation.reservation.dao.ReservationDAO;
-import reservation.reservation.dao.SalleDAO;
+import reservation.reservation.dao.*;
 import reservation.reservation.model.Etage;
 import reservation.reservation.model.Reservation;
 import reservation.reservation.model.Respo;
@@ -88,22 +83,53 @@ public class RespoController {
 
     @FXML
     public void enregistrerSalle() {
-        Salle salleFromForm = buildSalleFromFormFields();
-        if (salleFromForm == null) {
+        String type = salleTypeField.getText();
+        String capaciteText = salleCapaciteField.getText();
+        String numEtageText = salleNumEtageField.getText();
+        String prixText = sallePrixField.getText();
+        Etage etage = salleEtageCombo.getSelectionModel().getSelectedItem();
+
+        if (type == null || type.trim().isEmpty() || capaciteText == null || numEtageText == null || prixText == null || etage == null) {
+            showAlert("Erreur", "Veuillez remplir tous les champs correctement");
+            return;
+        }
+
+        int capacite;
+        int numEtage;
+        double prix;
+        try {
+            capacite = Integer.parseInt(capaciteText.trim());
+            numEtage = Integer.parseInt(numEtageText.trim());
+            prix = Double.parseDouble(prixText.trim());
+        } catch (Exception e) {
+            showAlert("Erreur", "Capacité, numéro d'étage et prix doivent être des nombres valides");
             return;
         }
 
         if (salleEnEdition == null) {
-            salleFromForm.setRespo(respo);
-            runSalleAction("Salle ajoutée avec succès", () -> salleDAO.save(salleFromForm));
+            Salle nouvelleSalle = new Salle();
+            nouvelleSalle.setTypeSalle(type.trim());
+            nouvelleSalle.setCapacite(capacite);
+            nouvelleSalle.setNumEtage(numEtage);
+            nouvelleSalle.setPrix(prix);
+            nouvelleSalle.setDispo(salleDispoCheck.isSelected());
+            nouvelleSalle.setEtage(etage);
+            nouvelleSalle.setRespo(respo);
+
+            salleDAO.save(nouvelleSalle);
+            refreshSalles();
+            showAlert("Succès", "Salle ajoutée avec succès");
         } else {
-            salleEnEdition.setTypeSalle(salleFromForm.getTypeSalle());
-            salleEnEdition.setCapacite(salleFromForm.getCapacite());
-            salleEnEdition.setNumEtage(salleFromForm.getNumEtage());
-            salleEnEdition.setPrix(salleFromForm.getPrix());
-            salleEnEdition.setDispo(salleFromForm.isDispo());
-            salleEnEdition.setEtage(salleFromForm.getEtage());
-            runSalleAction("Salle modifiée avec succès", () -> salleDAO.update(salleEnEdition));
+            salleEnEdition.setTypeSalle(type.trim());
+            salleEnEdition.setCapacite(capacite);
+            salleEnEdition.setNumEtage(numEtage);
+            salleEnEdition.setPrix(prix);
+            salleEnEdition.setDispo(salleDispoCheck.isSelected());
+            salleEnEdition.setEtage(etage);
+
+            salleDAO.update(salleEnEdition);
+            refreshSalles();
+            showAlert("Succès", "Salle modifiée avec succès");
         }
 
         annulerEditionSalle();
@@ -122,7 +148,9 @@ public class RespoController {
         Salle salle = getSelectedSalle("Veuillez sélectionner une salle à supprimer");
         if (salle == null) return;
 
-        runSalleAction("Salle supprimée avec succès", () -> salleDAO.delete(salle));
+        salleDAO.delete(salle);
+        refreshSalles();
+        showAlert("Succès", "Salle supprimée avec succès");
     }
 
     @FXML
@@ -140,12 +168,27 @@ public class RespoController {
 
     @FXML
     public void validerReservation() {
-        updateReservationEtat("validee", true);
+        Reservation reservation = getSelectedReservation("Sélectionnez une réservation");
+        if (reservation == null) return;
+
+        if (!respo.isActif()) {
+            showAlert("Accès refusé", "Responsable désactivé");
+            return;
+        }
+
+        reservation.setEtat("validee");
+        reservationDAO.update(reservation);
+        tableReservations.refresh();
     }
 
     @FXML
     public void refuserReservation() {
-        updateReservationEtat("refusee", false);
+        Reservation reservation = getSelectedReservation("Sélectionnez une réservation");
+        if (reservation == null) return;
+
+        reservation.setEtat("refusee");
+        reservationDAO.update(reservation);
+        tableReservations.refresh();
     }
 
     // ================= UTIL =================
@@ -156,30 +199,6 @@ public class RespoController {
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.show();
-    }
-
-    private void showError(String msg) {
-        showAlert("Erreur", msg);
-    }
-
-    private void runSalleAction(String successMessage, Runnable action) {
-        action.run();
-        refreshSalles();
-        showAlert("Succès", successMessage);
-    }
-
-    private void updateReservationEtat(String etat, boolean checkActifRespo) {
-        Reservation reservation = getSelectedReservation("Sélectionnez une réservation");
-        if (reservation == null) return;
-
-        if (checkActifRespo && !respo.isActif()) {
-            showAlert("Accès refusé", "Responsable désactivé");
-            return;
-        }
-
-        reservation.setEtat(etat);
-        reservationDAO.update(reservation);
-        tableReservations.refresh();
     }
 
     private void refreshSalles() {
@@ -234,25 +253,10 @@ public class RespoController {
         selectEtage(salleEtageCombo, salle.getEtage());
     }
 
-    private Salle buildSalleFromFormFields() {
-        String type = salleTypeField.getText();
-        Integer capacite = parseInt(salleCapaciteField.getText());
-        Integer numEtage = parseInt(salleNumEtageField.getText());
-        Double prix = parseDouble(sallePrixField.getText());
-        Etage etage = salleEtageCombo.getSelectionModel().getSelectedItem();
-
-        if (type == null || type.trim().isEmpty() || capacite == null || numEtage == null || prix == null || etage == null) {
-            showError("Veuillez remplir tous les champs correctement");
-            return null;
-        }
-
-        return buildSalleFromForm(type, capacite, numEtage, prix, salleDispoCheck.isSelected(), etage);
-    }
-
     private Salle getSelectedSalle(String errorMessage) {
         Salle salle = tableSalles.getSelectionModel().getSelectedItem();
         if (salle == null) {
-            showError(errorMessage);
+            showAlert("Erreur", errorMessage);
         }
         return salle;
     }
@@ -260,7 +264,7 @@ public class RespoController {
     private Reservation getSelectedReservation(String errorMessage) {
         Reservation reservation = tableReservations.getSelectionModel().getSelectedItem();
         if (reservation == null) {
-            showError(errorMessage);
+            showAlert("Erreur", errorMessage);
         }
         return reservation;
     }
@@ -272,33 +276,6 @@ public class RespoController {
                 combo.getSelectionModel().select(e);
                 return;
             }
-        }
-    }
-
-    private Salle buildSalleFromForm(String type, int capacite, int numEtage, double prix, boolean dispo, Etage etage) {
-        Salle salle = new Salle();
-        salle.setTypeSalle(type == null ? "" : type.trim());
-        salle.setCapacite(capacite);
-        salle.setNumEtage(numEtage);
-        salle.setPrix(prix);
-        salle.setDispo(dispo);
-        salle.setEtage(etage);
-        return salle;
-    }
-
-    private Integer parseInt(String text) {
-        try {
-            return Integer.parseInt(text.trim());
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    private Double parseDouble(String text) {
-        try {
-            return Double.parseDouble(text.trim());
-        } catch (Exception e) {
-            return null;
         }
     }
 
