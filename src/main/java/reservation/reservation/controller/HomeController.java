@@ -55,8 +55,8 @@ public class HomeController {
 
     @FXML
     private void handleLogout() {
-            switchScene("/reservation/Views/connexion.fxml", "Connexion");
-            System.out.println("Déconnexion réussie");
+        switchScene("/reservation/Views/connexion.fxml", "Connexion");
+        System.out.println("Déconnexion réussie");
 
     }
 
@@ -77,4 +77,6 @@ public class HomeController {
         // Logique pour afficher les paramètres
         System.out.println("Affichage des paramètres");
     }
+
+
 }

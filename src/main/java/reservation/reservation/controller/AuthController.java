@@ -2,6 +2,7 @@ package reservation.reservation.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import reservation.reservation.model.Role;
 import reservation.reservation.model.Utilisateur;
 import reservation.reservation.service.AuthService;
 import reservation.reservation.util.SessionCon;
@@ -27,7 +28,11 @@ public class AuthController {
                     passwordField.getText()
             );
             SessionCon.setUser(u);
-            switchScene("/reservation/Views/home.fxml", "Home");
+            if(u.getRole() == Role.SUPERUSER) {
+
+                switchScene("/reservation/Views/InterfacesSuperUser/homeadm.fxml", "homeadm");
+            }else
+                switchScene("/reservation/Views/home.fxml", "Home");
         } catch (Exception e) {
             messageLabel.setText(e.getMessage());
         }

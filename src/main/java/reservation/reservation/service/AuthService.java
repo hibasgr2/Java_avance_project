@@ -16,7 +16,7 @@ public class AuthService {
         }
 
 
-      Utilisateur u = new Client(nom,tel,email, PasswordUtil.hashPassword(password),0.0);
+        Utilisateur u = new Client(nom,tel,email, PasswordUtil.hashPassword(password),0.0);
         utilisateurDao.save(u);
     }
 
