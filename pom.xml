@@ -169,6 +169,7 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+
         <!-- Hashage du password -->
         <dependency>
             <groupId>org.mindrot</groupId>

@@ -31,8 +31,12 @@ public class AuthController {
             if(u.getRole() == Role.SUPERUSER) {
 
                 switchScene("/reservation/Views/InterfacesSuperUser/homeadm.fxml", "homeadm");
-            }else
-                switchScene("/reservation/Views/home.fxml", "Home");
+            } else if(u.getRole() == Role.RESPO) {
+                switchScene("/reservation/Views/respo.fxml", "Dashboard Responsable");
+            }
+            else
+              switchScene("/reservation/Views/home.fxml", "Home");
+
         } catch (Exception e) {
             messageLabel.setText(e.getMessage());
         }

@@ -78,6 +78,13 @@ public class Salle {
     public double getPrix() { return prix; }
     public void setPrix(double prix) { this.prix = prix; }
 
+    public Etage getEtage() { return etage; }
+    public void setEtage(Etage etage) { this.etage = etage; }
+
+    public String toString() {
+        return typeSalle + " (Capacité : " + capacite + ")";
+    }
+
     public List<Reservation> getReservations() { return reservations; }
     public void setReservations(List<Reservation> reservations) { this.reservations = reservations; }
 }

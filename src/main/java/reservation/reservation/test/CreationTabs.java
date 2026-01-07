@@ -3,6 +3,8 @@ package reservation.reservation.test;
 import reservation.reservation.dao.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import reservation.reservation.model.Etage;
+import reservation.reservation.model.Immeuble;
 import reservation.reservation.model.SupUser;
 import reservation.reservation.util.PasswordUtil;
 
@@ -51,17 +53,31 @@ public class CreationTabs  {
             // Exécuter une requête simple pour déclencher la création des tables
             session.createNativeQuery("SELECT 1").getResultList();
 
+
             PasswordUtil pass = new PasswordUtil();
 
-            System.out.println("👤 Création d'un SuperUser...");
-            SupUser superUser = new SupUser(
-                    "Admin Principal",
-                    "0612345678",
-                    "admin@reservation.com",
-                    PasswordUtil.hashPassword("admin123")
+//            System.out.println("👤 Création d'un SuperUser...");
+//            SupUser superUser = new SupUser(
+//                    "Admin Principal",
+//                    "0612345678",
+//                    "admin@reservation.com",
+//                    PasswordUtil.hashPassword("admin123")
+//
+//            );
+            System.out.println("👤 Création d'Immeuble...");
+            Immeuble immeuble = new Immeuble("Casablanca-Orangers");
+            System.out.println(" Creation des etages");
+            Etage etage0 = new Etage(immeuble);
+            Etage etage1 = new Etage(immeuble);
+            Etage etage2 = new Etage(immeuble);
 
-            );
-            session.persist(superUser);
+
+//            session.persist(superUser);
+            session.persist(immeuble);
+            session.persist(etage0);
+            session.persist(etage1);
+            session.persist(etage2);
+
             transaction.commit();
             System.out.println("✅ Tables créées avec succès !");
 

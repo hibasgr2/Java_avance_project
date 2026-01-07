@@ -19,7 +19,7 @@ import reservation.reservation.util.SceneManager;
 import reservation.reservation.controller.UtilisateurController;
 import reservation.reservation.util.SessionCon;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class AdminController {
@@ -50,6 +50,24 @@ public class AdminController {
         if (nomRespo != null) {
             nomRespo.setText("Bienvenue " + SessionCon.getUser().getNomComplet());
         }
+    }
+
+    @FXML
+    public void ExportTocsv() throws IOException {
+        Writer writer = null;
+        try {
+            File file = new File("RespoList.csv.");
+            writer = new BufferedWriter(new FileWriter(file));
+            for (Respo r: respoTable.getItems()) {
+                String text = r.getNomComplet() + "," + r.getTel() + "," + r.getEmail() + "," +r.isActif()+"\n";
+                writer.write(text);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        writer.flush();
+        writer.close();
+
     }
 
     @FXML

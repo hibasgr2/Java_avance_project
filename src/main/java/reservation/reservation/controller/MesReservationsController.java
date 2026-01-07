@@ -1,26 +1,25 @@
 package reservation.reservation.controller;
 
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import reservation.reservation.dao.ReservationDAO;
-import reservation.reservation.model.*;
+import reservation.reservation.model.Client;
+import reservation.reservation.model.EtatReservation;
+import reservation.reservation.model.Reservation;
+import reservation.reservation.model.Salle;
 import reservation.reservation.service.ReservationService;
 import reservation.reservation.util.SessionCon;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static reservation.reservation.util.SceneManager.switchScene;
-
-public class HomeController {
-
-    @FXML
-    private Label userLabel;
+public class MesReservationsController {
 
     @FXML private TableView<Reservation> reservationsTable;
     @FXML private TableColumn<Reservation, Void> actionColumn;
@@ -37,35 +36,16 @@ public class HomeController {
         if (SessionCon.getUser() instanceof Client) {
             this.currentClient = (Client) SessionCon.getUser();
 
-            if(currentClient != null) {
-                userLabel.setText("Bienvenue " + currentClient.getNomComplet());
-            }
+            setupActionColumn();
+            setupEtatColumn(EtatReservation.ANNULEE);
 
-//            setupActionColumn();
-//            setupEtatColumn(EtatReservation.ANNULEE);
-
-            try {
-                salleColumn.setCellValueFactory(new PropertyValueFactory<>("salle"));
-                dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-                etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
-
-                System.out.println(salleColumn.getText());
-                System.out.println(dateColumn.getText());
-                System.out.println(etatColumn.getText());
-
-
-
-            } catch (RuntimeException e) {
-                throw new RuntimeException("hada howa erreur "+e.getMessage());
-            }
             // Lier les colonnes aux propriétés
-
+            salleColumn.setCellValueFactory(new PropertyValueFactory<>("salle"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+            etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
+            loadReservations();
 //            // Charger toutes les réservations au début
 //            reservationsTable.setItems(FXCollections.observableArrayList(getAllReservations()));
-
-            reservationsTable.setItems(FXCollections.observableArrayList(getAllReservations()));
-            System.out.println(reservationsTable.getItems());
-            loadReservations();
 
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun client connecté.");
@@ -79,24 +59,23 @@ public class HomeController {
                 .collect(Collectors.toList());
 
         reservationsTable.setItems(FXCollections.observableArrayList(filtered));
-        //System.out.println(reservationsTable.getItems());
     }
 
-    public void showValidees(ActionEvent mouseEvent) {
+    public void showValidees(MouseEvent mouseEvent) {
         filterReservationsByEtat(EtatReservation.VALIDEE);
     }
 
-    public void showAttente(ActionEvent mouseEvent) {
+    public void showAttente(MouseEvent mouseEvent) {
         filterReservationsByEtat(EtatReservation.EN_ATTENTE);
     }
 
-    public void showRejetees(ActionEvent mouseEvent) {
+    public void showRejetees(MouseEvent mouseEvent) {
         filterReservationsByEtat(EtatReservation.REFUSEE);
     }
 
     private List<Reservation> getAllReservations() {
         List<Reservation> reservations = reservationDAO.findByClientId(currentClient.getId());
-        System.out.println("Reservations trouvées : " + reservations.size());
+        reservationsTable.setItems(FXCollections.observableArrayList(reservations));
         return  reservations;
     }
 
@@ -190,23 +169,6 @@ public class HomeController {
         alert.showAndWait();
     }
 
-    @FXML
-    private void showProfile() {
-        // Logique pour afficher le profil
-        switchScene("/reservation/Views/client/Profil.fxml", "Profil");
 
-    }
 
-    @FXML
-    private void handleLogout() {
-        switchScene("/reservation/Views/connexion.fxml", "Connexion");
-        System.out.println("Déconnexion réussie");
-
-    }
-
-    public void AddResrvation(ActionEvent actionEvent) {
-
-        switchScene("/reservation/Views/client/Add_res.fxml", "Reservation");
-
-    }
 }

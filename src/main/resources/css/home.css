@@ -1,0 +1,62 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #FDEB9E;
+}
+
+/* NAVBAR */
+.navbar {
+    -fx-background-color: #000B58;
+}
+
+.logo {
+    -fx-text-fill: #FDEB9E;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+.nav-btn {
+    -fx-background-color: #003161;
+    -fx-text-fill: white;
+}
+
+.logout-btn {
+    -fx-background-color: #006A67;
+    -fx-text-fill: white;
+}
+
+/* CARDS */
+.card {
+    -fx-background-color: white;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+}
+
+.title {
+    -fx-font-size: 14px;
+    -fx-text-fill: #003161;
+}
+
+.username {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+
+/* STATS */
+.stat-card {
+    -fx-background-color: #003161;
+    -fx-padding: 15;
+    -fx-background-radius: 10;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+}
+
+.stat-card Label {
+    -fx-text-fill: white;
+}
+
+/* BUTTON */
+.add-btn {
+    -fx-background-color: #006A67;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}

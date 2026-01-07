@@ -28,8 +28,8 @@ public class Etage {
     // Constructeurs
     public Etage() {}
 
-    public Etage(Respo respo) {
-        this.respo = respo;
+    public Etage(Immeuble immeuble) {
+        this.immeuble = immeuble;
     }
 
     // Getters et Setters

@@ -24,11 +24,16 @@ public class Reservation {
     @Column(name = "date_reservation", nullable = false)
     private LocalDateTime dateReservation;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "etat", nullable = false, length = 50)
-    private String etat;
+    private EtatReservation etat;
 
     @Column(name = "total", nullable = false)
     private double total;
+
+    @Column(name = "description", nullable = false)
+    private String Description;
+
 
     @ManyToOne
     @JoinColumn(name = "sup_user_id")
@@ -43,7 +48,7 @@ public class Reservation {
         this.dateReservation = LocalDateTime.now();
     }
 
-    public Reservation(Salle salle, Client client, String etat, double total) {
+    public Reservation(Salle salle, Client client, EtatReservation etat, double total) {
         this.salle = salle;
         this.client = client;
         this.etat = etat;
@@ -64,9 +69,19 @@ public class Reservation {
     public LocalDateTime getDateReservation() { return dateReservation; }
     public void setDateReservation(LocalDateTime dateReservation) { this.dateReservation = dateReservation; }
 
-    public String getEtat() { return etat; }
-    public void setEtat(String etat) { this.etat = etat; }
+    public EtatReservation getEtat() { return etat; }
+    public void setEtat(EtatReservation etat) { this.etat = etat; }
 
     public double getTotal() { return total; }
     public void setTotal(double total) { this.total = total; }
+
+
+    public void setRespo(Respo respo) {
+        this.respo = respo;
+    }
+
+    public void setDescription(String desc) {
+        this.Description = desc;
+    }
+    public String getDescription(){ return Description; }
 }

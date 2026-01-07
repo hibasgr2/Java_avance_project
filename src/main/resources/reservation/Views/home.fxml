@@ -1,216 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.effect.DropShadow?>
 
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="reservation.reservation.controller.HomeController"
 
-<VBox spacing="0" alignment="TOP_CENTER"
-      xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="reservation.reservation.controller.HomeController"
-      style="-fx-background-color: linear-gradient(to bottom right, #003161, #000B58);">
+            style="-fx-background-color: #FDEB9E;">
 
-    <!-- Barre de navigation (inchangée) -->
-    <HBox alignment="CENTER_LEFT" style="
-       -fx-background-color: rgba(255, 255, 255, 0.95);
-       -fx-padding: 15 30;
-       -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.2), 10, 0, 0, 3);"
-          prefHeight="70">
-        <!-- ... votre barre de navigation ... -->
-    </HBox>
+    <!-- NAVBAR -->
+    <top>
+        <HBox spacing="20" style="-fx-background-color:#000B58;">
+            <padding>
+                <Insets top="15" right="20" bottom="15" left="20"/>
+            </padding>
 
-    <!-- Contenu principal -->
-    <ScrollPane fitToWidth="true" hbarPolicy="NEVER">
-        <content>
-            <!-- Conteneur principal pour la nouvelle disposition -->
-            <HBox spacing="40" alignment="TOP_LEFT" style="-fx-padding: 40 50 50 50;-fx-background-color: linear-gradient(to bottom right, #003161, #000B58);">
+            <Label text="LOGO" style="-fx-text-fill:#FDEB9E; -fx-font-size:18px;"/>
 
-                <!-- BLOC GAUCHE : Bienvenue et statistiques -->
-                <VBox spacing="25" style="-fx-min-width: 350; -fx-pref-width: 350; -fx-background-color: linear-gradient(to bottom right, #003161, #000B58);" >
+            <Pane HBox.hgrow="ALWAYS"/>
 
-                    <!-- Message de bienvenue (redimensionné) -->
-                    <VBox spacing="15" alignment="CENTER_LEFT" style="
-                     -fx-background-color: rgba(255, 255, 255, 0.95);
-                     -fx-background-radius: 15;
-                     -fx-padding: 30 35;
-                     -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.2), 20, 0.2, 0, 5);
-                     -fx-border-radius: 15;
-                     -fx-border-color: #FDEB9E;
-                     -fx-border-width: 2;">
+            <Button onAction="#showProfile" text="Profil"/>
+            <Button onAction="#handleLogout" text="Déconnexion"/>
+        </HBox>
+    </top>
 
-                        <!-- Icône et titre -->
-                        <HBox spacing="15" alignment="CENTER_LEFT">
-                            <StackPane>
-                                <Circle radius="35" fill="#006A67" style="-fx-effect: dropshadow(gaussian, #006A67, 15, 0.3, 0, 0);"/>
-                                <Label text="✓" style="-fx-text-fill: #FDEB9E; -fx-font-size: 30px; -fx-font-weight: bold;"/>
-                            </StackPane>
-                            <VBox spacing="3">
-                                <Label fx:id="welcomeLabel" style="
-                                -fx-text-fill: #003161;
-                                -fx-font-size: 28px;
-                                -fx-font-weight: bold;">
-                                    <font>
-                                        <Font name="System Bold" size="28"/>
-                                    </font>
-                                </Label>
-                                <Label text="Heureux de vous revoir !"
-                                       style="-fx-text-fill: #006A67; -fx-font-size: 16px; -fx-font-weight: bold;"/>
-                            </VBox>
-                        </HBox>
+    <!-- BODY -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <HBox spacing="30">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
 
-                        <Separator style="-fx-background-color: #FDEB9E; -fx-padding: 10 0 15 0;"/>
+                <!-- LEFT -->
+                <VBox spacing="15" prefWidth="500">
 
-                        <!-- Statistiques des réservations -->
-                        <VBox spacing="20">
-                            <Label text="Statistiques des Réservations"
-                                   style="-fx-text-fill: #003161; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+                    <Label fx:id="userLabel"
+                           text="Vous êtes connecté : User"
+                           style="-fx-font-size:16px; -fx-font-weight:bold;"/>
 
-                            <HBox spacing="15" alignment="CENTER">
-                                <!-- Réservations validées -->
-                                <VBox spacing="8" alignment="CENTER" style="
-                                    -fx-background-color: rgba(0, 106, 103, 0.1);
-                                    -fx-background-radius: 10;
-                                    -fx-padding: 15;
-                                    -fx-pref-width: 140;">
-                                    <Label text="✓" style="-fx-text-fill: #006A67; -fx-font-size: 24px;"/>
-                                    <Label fx:id="validReservationsLabel" text="0"
-                                           style="-fx-text-fill: #006A67; -fx-font-size: 32px; -fx-font-weight: bold;"/>
-                                    <Label text="Réservations validées"
-                                           style="-fx-text-fill: #003161; -fx-font-size: 13px; -fx-text-alignment: center; -fx-wrap-text: true;"/>
-                                </VBox>
+                    <HBox spacing="15">
+                        <Button text="Validee" onAction="#showValidees"/>
+                        <Button  text="En attente" onAction="#showAttente"/>
+                        <Button  text="Rejetee" onAction="#showRejetees"/>
+                    </HBox>
 
-                                <!-- Réservations en attente -->
-                                <VBox spacing="8" alignment="CENTER" style="
-                                    -fx-background-color: rgba(253, 235, 158, 0.1);
-                                    -fx-background-radius: 10;
-                                    -fx-padding: 15;
-                                    -fx-pref-width: 140;">
-                                    <Label text="⏳" style="-fx-text-fill: #FDEB9E; -fx-font-size: 24px;"/>
-                                    <Label fx:id="pendingReservationsLabel" text="0"
-                                           style="-fx-text-fill: #FDEB9E; -fx-font-size: 32px; -fx-font-weight: bold;"/>
-                                    <Label text="En attente"
-                                           style="-fx-text-fill: #003161; -fx-font-size: 13px; -fx-text-alignment: center; -fx-wrap-text: true;"/>
-                                </VBox>
-                            </HBox>
-                        </VBox>
+                    <TableView fx:id="reservationsTable">
+                        <columns>
+                            <TableColumn fx:id="salleColumn" text="salle"/>
+                            <TableColumn fx:id="dateColumn" text="date"/>
+                            <TableColumn fx:id="etatColumn" text="etat"/>
+                        </columns>
+                    </TableView>
 
-                        <Separator style="-fx-background-color: #FDEB9E; -fx-padding: 15 0 10 0;"/>
-
-                        <!-- Informations utilisateur -->
-                        <HBox spacing="20" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
-                            <VBox spacing="5" alignment="CENTER">
-                                <Circle radius="20" fill="#003161" style="-fx-effect: dropshadow(gaussian, #003161, 10, 0.3, 0, 0);"/>
-                                <Label text="Compte" style="-fx-text-fill: #003161; -fx-font-weight: bold; -fx-font-size: 12px;"/>
-                                <Label fx:id="userLabel" style="-fx-text-fill: #006A67; -fx-font-size: 13px; -fx-wrap-text: true;"/>
-                            </VBox>
-
-                            <VBox spacing="5" alignment="CENTER">
-                                <Circle radius="20" fill="#000B58" style="-fx-effect: dropshadow(gaussian, #000B58, 10, 0.3, 0, 0);"/>
-                                <Label text="Statut" style="-fx-text-fill: #003161; -fx-font-weight: bold; -fx-font-size: 12px;"/>
-                                <Label text="Connecté" style="-fx-text-fill: #006A67; -fx-font-size: 13px;"/>
-                            </VBox>
-
-                            <VBox spacing="5" alignment="CENTER">
-                                <Circle radius="20" fill="#FDEB9E" style="-fx-effect: dropshadow(gaussian, #FDEB9E, 10, 0.3, 0, 0);"/>
-                                <Label text="Date" style="-fx-text-fill: #003161; -fx-font-weight: bold; -fx-font-size: 12px;"/>
-                                <Label fx:id="dateLabel" style="-fx-text-fill: #006A67; -fx-font-size: 13px;"/>
-                            </VBox>
-                        </HBox>
-                    </VBox>
-
-                    <!-- Actions rapides (colonne) -->
-                    <VBox spacing="15" alignment="CENTER">
-                        <Button text="Mes Réservations" onAction="#showReservations" style="
-                            -fx-background-color: white;
-                            -fx-text-fill: #003161;
-                            -fx-font-weight: bold;
-                            -fx-font-size: 14px;
-                            -fx-padding: 12 25;
-                            -fx-cursor: hand;
-                            -fx-background-radius: 8;
-                            -fx-border-radius: 8;
-                            -fx-border-color: #006A67;
-                            -fx-border-width: 2;
-                            -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.1), 10, 0.3, 0, 2);
-                            -fx-pref-width: 350;">
-                            <graphic>
-                                <Rectangle width="20" height="20" arcWidth="5" arcHeight="5" fill="#006A67"/>
-                            </graphic>
-                        </Button>
-
-                        <Button text="Nouvelle Réservation" onAction="#newReservation" style="
-                            -fx-background-color: linear-gradient(to right, #006A67, #003161);
-                            -fx-text-fill: white;
-                            -fx-font-weight: bold;
-                            -fx-font-size: 14px;
-                            -fx-padding: 12 25;
-                            -fx-cursor: hand;
-                            -fx-background-radius: 8;
-                            -fx-effect: dropshadow(gaussian, rgba(0, 106, 103, 0.4), 10, 0.3, 0, 2);
-                            -fx-pref-width: 350;">
-                            <graphic>
-                                <Rectangle width="20" height="20" arcWidth="5" arcHeight="5" fill="#FDEB9E"/>
-                            </graphic>
-                        </Button>
-
-                        <Button text="Paramètres" onAction="#showSettings" style="
-                            -fx-background-color: white;
-                            -fx-text-fill: #003161;
-                            -fx-font-weight: bold;
-                            -fx-font-size: 14px;
-                            -fx-padding: 12 25;
-                            -fx-cursor: hand;
-                            -fx-background-radius: 8;
-                            -fx-border-radius: 8;
-                            -fx-border-color: #006A67;
-                            -fx-border-width: 2;
-                            -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.1), 10, 0.3, 0, 2);
-                            -fx-pref-width: 350;">
-                            <graphic>
-                                <Rectangle width="20" height="20" arcWidth="5" arcHeight="5" fill="#003161"/>
-                            </graphic>
-                        </Button>
-                    </VBox>
                 </VBox>
 
-                <!-- BLOC DROIT : Espace pour autres contenus (liste des réservations, etc.) -->
-                <VBox spacing="20" style="-fx-min-width: 400; -fx-pref-width: 600; -fx-max-width: 800;">
-                    <!-- Vous pourrez ajouter ici la liste des réservations ou autres contenus -->
-                    <Label text="Mes Dernières Réservations"
-                           style="-fx-text-fill: #FDEB9E; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+                <!-- RIGHT -->
+                <VBox spacing="20" prefWidth="300">
 
-                    <!-- Placeholder pour le futur contenu -->
-                    <VBox alignment="CENTER" style="
-                        -fx-background-color: rgba(255, 255, 255, 0.05);
-                        -fx-background-radius: 15;
-                        -fx-padding: 100;
-                        -fx-border-color: rgba(253, 235, 158, 0.2);
-                        -fx-border-width: 2;
-                        -fx-border-radius: 15;
-                        -fx-border-style: dashed;">
-                        <Label text="Contenu à venir"
-                               style="-fx-text-fill: rgba(253, 235, 158, 0.7); -fx-font-size: 18px;"/>
-                        <Label text="(Liste des réservations, calendrier, etc.)"
-                               style="-fx-text-fill: rgba(253, 235, 158, 0.5); -fx-font-size: 14px; -fx-padding: 10 0 0 0;"/>
-                    </VBox>
+                    <Button text="➕ Ajouter réservation"
+                            onAction="#AddResrvation"/>
                 </VBox>
+
             </HBox>
-        </content>
-    </ScrollPane>
+        </ScrollPane>
+    </center>
 
-    <!-- Pied de page (inchangé) -->
-    <VBox alignment="CENTER" style="
-       -fx-background-color: rgba(0, 11, 88, 0.9);
-       -fx-padding: 20;
-       -fx-border-color: #006A67;
-       -fx-border-width: 1 0 0 0;">
-        <Label text="© 2023 ReservationApp - Tous droits réservés"
-               style="-fx-text-fill: rgba(253, 235, 158, 0.7); -fx-font-size: 12px;"/>
-        <Label text="Contact : support@reservationapp.com | Tél : +33 1 23 45 67 89"
-               style="-fx-text-fill: rgba(253, 235, 158, 0.5); -fx-font-size: 11px; -fx-padding: 5 0 0 0;"/>
-    </VBox>
-</VBox>
+</BorderPane>

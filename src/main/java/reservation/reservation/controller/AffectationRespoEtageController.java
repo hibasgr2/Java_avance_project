@@ -137,7 +137,7 @@ public class AffectationRespoEtageController implements Initializable {
 
     private void configurerTable() {
         TableColumn<AffectationDTO, String> immeubleCol = (TableColumn<AffectationDTO, String>) affectationTable.getColumns().get(0);
-        TableColumn<AffectationDTO, String> etageCol = (TableColumn<AffectationDTO, String>) affectationTable.getColumns().get(0);
+        TableColumn<AffectationDTO, String> etageCol = (TableColumn<AffectationDTO, String>) affectationTable.getColumns().get(1);
         TableColumn<AffectationDTO, String> respoCol = (TableColumn<AffectationDTO, String>) affectationTable.getColumns().get(2);
 
         immeubleCol.setCellValueFactory(new PropertyValueFactory<>("immeubleAdresse"));

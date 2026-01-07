@@ -44,6 +44,9 @@
             <Button text="Retour" onAction="#redirectToDashboard"
                     style="-fx-background-color: #003161; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;"
             />
+            <Button text="Export to CSV" onAction="#ExportTocsv"
+                    style="-fx-background-color: #003161; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10 20; -fx-background-radius: 5;"
+            />
         </HBox>
 
         <!-- Tableau des responsables -->
