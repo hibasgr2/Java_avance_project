@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="reservation.reservation.controller.MesReservationsController"
+            style="-fx-background-color: #f4f7fa;">
+
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: #ffffff; -fx-padding: 15 25; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+            <Label text="Mon Historique de Réservations" style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #003161;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="Retour au tableau de bord"  style="-fx-background-color: #003161; -fx-text-fill: white; -fx-font-weight: bold;"/>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox spacing="15" style="-fx-padding: 20;">
+            <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn text="Salle" prefWidth="200">
+                        <cellValueFactory><PropertyValueFactory property="salleDetails" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Date" prefWidth="150">
+                        <cellValueFactory><PropertyValueFactory property="formattedDate" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Prix" prefWidth="100">
+                        <cellValueFactory><PropertyValueFactory property="total" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="etatColumn" text="État" prefWidth="120">
+                        <cellValueFactory><PropertyValueFactory property="etat" /></cellValueFactory>
+                    </TableColumn>
+                    <TableColumn fx:id="actionColumn" text="Action" prefWidth="120"/>
+                </columns>
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+            </TableView>
+        </VBox>
+    </center>
+</BorderPane>
