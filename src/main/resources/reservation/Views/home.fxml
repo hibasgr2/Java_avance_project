@@ -5,7 +5,6 @@
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="reservation.reservation.controller.HomeController"
-
             style="-fx-background-color: #FDEB9E;">
 
     <!-- NAVBAR -->
@@ -26,44 +25,47 @@
 
     <!-- BODY -->
     <center>
-        <ScrollPane fitToWidth="true">
-            <HBox spacing="30">
-                <padding>
-                    <Insets top="20" right="20" bottom="20" left="20"/>
-                </padding>
+        <HBox spacing="30">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
 
-                <!-- LEFT -->
-                <VBox spacing="15" prefWidth="500">
+            <!-- LEFT -->
+            <VBox spacing="15"
+                  prefWidth="500"
+                  HBox.hgrow="ALWAYS">
 
-                    <Label fx:id="userLabel"
-                           text="Vous êtes connecté : User"
-                           style="-fx-font-size:16px; -fx-font-weight:bold;"/>
+                <Label fx:id="userLabel"
+                       text="Vous êtes connecté : User"
+                       style="-fx-font-size:16px; -fx-font-weight:bold;"/>
 
-                    <HBox spacing="15">
-                        <Button text="Validee" onAction="#showValidees"/>
-                        <Button  text="En attente" onAction="#showAttente"/>
-                        <Button  text="Rejetee" onAction="#showRejetees"/>
-                    </HBox>
+                <HBox spacing="15">
+                    <Button text="Validee" onAction="#showValidees"/>
+                    <Button text="En attente" onAction="#showAttente"/>
+                    <Button text="Rejetee" onAction="#showRejetees"/>
+                </HBox>
 
-                    <TableView fx:id="reservationsTable">
-                        <columns>
-                            <TableColumn fx:id="salleColumn" text="salle"/>
-                            <TableColumn fx:id="dateColumn" text="date"/>
-                            <TableColumn fx:id="etatColumn" text="etat"/>
-                        </columns>
-                    </TableView>
+                <TableView fx:id="reservationsTable"
+                           VBox.vgrow="ALWAYS"
+                           prefHeight="300">
+                    <columns>
+<!--                        <TableColumn fx:id="salleColumn" text="Salle"/>-->
+                        <TableColumn fx:id="dateColumn" text="DateReservation"/>
+                        <TableColumn fx:id="etatColumn" text="Etat"/>
+                        <TableColumn fx:id="TypeSalleColumn" text="TypeSalle"/>
+                        <TableColumn fx:id="descriptionColumn" text="Description"/>
+                    </columns>
+                </TableView>
 
-                </VBox>
+            </VBox>
 
-                <!-- RIGHT -->
-                <VBox spacing="20" prefWidth="300">
+            <!-- RIGHT -->
+            <VBox spacing="20" prefWidth="300">
+                <Button text="➕ Ajouter réservation"
+                        onAction="#AddResrvation"/>
+            </VBox>
 
-                    <Button text="➕ Ajouter réservation"
-                            onAction="#AddResrvation"/>
-                </VBox>
-
-            </HBox>
-        </ScrollPane>
+        </HBox>
     </center>
 
 </BorderPane>

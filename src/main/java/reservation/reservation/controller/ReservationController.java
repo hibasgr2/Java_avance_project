@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import static reservation.reservation.util.SceneManager.switchScene;
+
 public class ReservationController {
     @FXML
     private TextArea descriptionField;
@@ -56,6 +58,7 @@ public class ReservationController {
                         : salle.getTypeSalle() + " - " + salle.getCapacite() + " places");
             }
         });
+
         System.out.println("Salles chargées : " + salleComboBox.getItems().size());
 
 
@@ -66,8 +69,10 @@ public class ReservationController {
 
     @FXML
     private void cancelReservation() {
-//        descriptionField.c();
+        descriptionField.clear();
         datePicker.setValue(null);
+        switchScene("/reservation/Views/home.fxml", "Home");
+
     }
 
     @FXML

@@ -29,13 +29,12 @@ public class ReservationDAO {
     public List<Reservation> findByClientId(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Reservation> reservations = session.createQuery(
-                        "FROM Reservation r WHERE r.client.id = :id", Reservation.class)
+                        "FROM Reservation r JOIN FETCH r.salle WHERE r.client.id = :id", Reservation.class)
                 .setParameter("id", id)
                 .getResultList();
         session.close();
         return reservations;
     }
-
 
 
     public void save(Reservation reservation) {

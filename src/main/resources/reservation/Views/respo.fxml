@@ -4,35 +4,53 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.effect.DropShadow?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="reservation.reservation.controller.RespoController">
+            fx:controller="reservation.reservation.controller.RespoController"
+            style="-fx-background-color: linear-gradient(to bottom right, #003161, #000B58);">
 
     <!-- ===== HEADER ===== -->
     <top>
-        <Label text="Dashboard Responsable"
-               style="-fx-font-size: 20px; -fx-font-weight: bold;"
-               BorderPane.alignment="CENTER">
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
-        </Label>
+        <VBox alignment="CENTER" spacing="10" style="-fx-padding: 30 0 20 0;">
+            <Rectangle width="60" height="4" arcWidth="5" arcHeight="5"
+                       fill="#006A67" style="-fx-effect: dropshadow(gaussian, #006A67, 10, 0.3, 0, 0);"/>
+            <Label text="Dashboard Responsable"
+                   style="-fx-text-fill: #FDEB9E; -fx-font-size: 28px; -fx-font-weight: bold;">
+                <font>
+                    <Font name="System Bold" size="28"/>
+                </font>
+            </Label>
+            <Label text="Gérez vos salles et réservations"
+                   style="-fx-text-fill: rgba(253, 235, 158, 0.8); -fx-font-size: 14px;"/>
+        </VBox>
     </top>
 
     <!-- ===== CENTER ===== -->
     <center>
-        <VBox spacing="20">
-            <padding>
-                <Insets top="15" right="15" bottom="15" left="15"/>
-            </padding>
-
+        <VBox spacing="20" alignment="TOP_CENTER" style="-fx-padding: 0 40 40 40;">
             <!-- ================= SALLES ================= -->
-            <VBox spacing="10">
-                <Label text="Mes salles"
-                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <VBox spacing="15" style="
+                 -fx-background-color: rgba(255, 255, 255, 0.95);
+                 -fx-background-radius: 15;
+                 -fx-padding: 25;
+                 -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.3), 25, 0.2, 0, 5);
+                 -fx-border-radius: 15;
+                 -fx-border-color: #FDEB9E;
+                 -fx-border-width: 1;">
 
-                <TableView fx:id="tableSalles" prefHeight="200">
+                <Label text="Mes salles"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #003161;"/>
+
+                <TableView fx:id="tableSalles" prefHeight="200" style="
+                    -fx-background-color: white;
+                    -fx-background-radius: 8;
+                    -fx-border-radius: 8;
+                    -fx-border-color: #ccc;
+                    -fx-border-width: 1.5;">
 
                     <columns>
                         <TableColumn text="ID" prefWidth="60">
@@ -73,50 +91,163 @@
                     </columns>
                 </TableView>
 
-                <HBox spacing="10">
-                    <Button text="Ajouter Salle" onAction="#ajouterSalle" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" prefWidth="140"/>
-                    <Button text="Modifier Salle" onAction="#modifierSalle" style="-fx-background-color: #FFC107; -fx-text-fill: black;" prefWidth="140"/>
-                    <Button text="Supprimer Salle" onAction="#supprimerSalle" style="-fx-background-color: #F44336; -fx-text-fill: white;" prefWidth="140"/>
-                    <Button text="Changer disponibilité" onAction="#changerDisponibilite" style="-fx-background-color: #2196F3; -fx-text-fill: white;" prefWidth="180"/>
+                <HBox spacing="10" alignment="CENTER">
+                    <Button text="Ajouter Salle" onAction="#ajouterSalle" style="
+                        -fx-background-color: linear-gradient(to right, #006A67, #003161);
+                        -fx-text-fill: white;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 20;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(0, 106, 103, 0.4), 10, 0.3, 0, 2);"
+                            prefWidth="140"/>
+
+                    <Button text="Modifier Salle" onAction="#modifierSalle" style="
+                        -fx-background-color: linear-gradient(to right, #FFC107, #FF9800);
+                        -fx-text-fill: #003161;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 20;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(255, 193, 7, 0.4), 10, 0.3, 0, 2);"
+                            prefWidth="140"/>
+
+                    <Button text="Supprimer Salle" onAction="#supprimerSalle" style="
+                        -fx-background-color: linear-gradient(to right, #F44336, #D32F2F);
+                        -fx-text-fill: white;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 20;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(244, 67, 54, 0.4), 10, 0.3, 0, 2);"
+                            prefWidth="140"/>
+
+                    <Button text="Changer disponibilité" onAction="#changerDisponibilite" style="
+                        -fx-background-color: linear-gradient(to right, #2196F3, #1976D2);
+                        -fx-text-fill: white;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 20;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(33, 150, 243, 0.4), 10, 0.3, 0, 2);"
+                            prefWidth="180"/>
                 </HBox>
 
-                <VBox spacing="10" style="-fx-background-color: #f5f5f5; -fx-padding: 10; -fx-background-radius: 6;">
-                    <Label fx:id="salleFormTitle" text="Formulaire Salle" style="-fx-font-size: 14px; -fx-font-weight: bold;"/>
+                <VBox spacing="15" style="
+                    -fx-background-color: rgba(240, 240, 240, 0.9);
+                    -fx-background-radius: 10;
+                    -fx-padding: 20;
+                    -fx-border-radius: 10;
+                    -fx-border-color: #006A67;
+                    -fx-border-width: 1;">
 
-                    <GridPane hgap="10" vgap="10">
-                        <Label text="Type" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-                        <TextField fx:id="salleTypeField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                    <Label fx:id="salleFormTitle" text="Formulaire Salle"
+                           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #003161;"/>
 
-                        <Label text="Capacité" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-                        <TextField fx:id="salleCapaciteField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                    <GridPane hgap="10" vgap="15">
+                        <Label text="Type" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                               style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
+                        <TextField fx:id="salleTypeField" GridPane.rowIndex="0" GridPane.columnIndex="1" style="
+                            -fx-background-color: white;
+                            -fx-background-radius: 8;
+                            -fx-border-radius: 8;
+                            -fx-border-color: #ccc;
+                            -fx-border-width: 1.5;
+                            -fx-padding: 8 12;
+                            -fx-pref-height: 35;"/>
 
-                        <Label text="Num étage" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-                        <TextField fx:id="salleNumEtageField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        <Label text="Capacité" GridPane.rowIndex="1" GridPane.columnIndex="0"
+                               style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
+                        <TextField fx:id="salleCapaciteField" GridPane.rowIndex="1" GridPane.columnIndex="1" style="
+                            -fx-background-color: white;
+                            -fx-background-radius: 8;
+                            -fx-border-radius: 8;
+                            -fx-border-color: #ccc;
+                            -fx-border-width: 1.5;
+                            -fx-padding: 8 12;
+                            -fx-pref-height: 35;"/>
 
-                        <Label text="Prix" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-                        <TextField fx:id="sallePrixField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                        <Label text="Num étage" GridPane.rowIndex="2" GridPane.columnIndex="0"
+                               style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
+                        <TextField fx:id="salleNumEtageField" GridPane.rowIndex="2" GridPane.columnIndex="1" style="
+                            -fx-background-color: white;
+                            -fx-background-radius: 8;
+                            -fx-border-radius: 8;
+                            -fx-border-color: #ccc;
+                            -fx-border-width: 1.5;
+                            -fx-padding: 8 12;
+                            -fx-pref-height: 35;"/>
 
-                        <Label text="Étage (FK)" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
-                        <ComboBox fx:id="salleEtageCombo" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                        <Label text="Prix" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                               style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
+                        <TextField fx:id="sallePrixField" GridPane.rowIndex="3" GridPane.columnIndex="1" style="
+                            -fx-background-color: white;
+                            -fx-background-radius: 8;
+                            -fx-border-radius: 8;
+                            -fx-border-color: #ccc;
+                            -fx-border-width: 1.5;
+                            -fx-padding: 8 12;
+                            -fx-pref-height: 35;"/>
 
-                        <CheckBox fx:id="salleDispoCheck" text="Disponible" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+                        <Label text="Étage (FK)" GridPane.rowIndex="4" GridPane.columnIndex="0"
+                               style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
+                        <ComboBox fx:id="salleEtageCombo" GridPane.rowIndex="4" GridPane.columnIndex="1" style="
+                            -fx-background-color: white;
+                            -fx-background-radius: 8;
+                            -fx-border-radius: 8;
+                            -fx-border-color: #ccc;
+                            -fx-border-width: 1.5;
+                            -fx-pref-height: 35;"/>
+
+                        <CheckBox fx:id="salleDispoCheck" text="Disponible"
+                                  GridPane.rowIndex="5" GridPane.columnIndex="1"
+                                  style="-fx-text-fill: #003161; -fx-font-weight: bold;"/>
                     </GridPane>
 
-                    <HBox spacing="10">
-                        <Button text="Enregistrer" onAction="#enregistrerSalle" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" prefWidth="140"/>
-                        <Button text="Annuler" onAction="#annulerEditionSalle" style="-fx-background-color: #cccccc; -fx-text-fill: black;" prefWidth="140"/>
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Enregistrer" onAction="#enregistrerSalle" style="
+                            -fx-background-color: linear-gradient(to right, #006A67, #003161);
+                            -fx-text-fill: white;
+                            -fx-font-weight: bold;
+                            -fx-background-radius: 8;
+                            -fx-padding: 10 30;
+                            -fx-cursor: hand;
+                            -fx-effect: dropshadow(gaussian, rgba(0, 106, 103, 0.4), 10, 0.3, 0, 2);"
+                                prefWidth="140"/>
+
+                        <Button text="Annuler" onAction="#annulerEditionSalle" style="
+                            -fx-background-color: #cccccc;
+                            -fx-text-fill: #003161;
+                            -fx-font-weight: bold;
+                            -fx-background-radius: 8;
+                            -fx-padding: 10 30;
+                            -fx-cursor: hand;"
+                                prefWidth="140"/>
                     </HBox>
                 </VBox>
             </VBox>
 
-            <Separator/>
+            <Separator style="-fx-background-color: rgba(253, 235, 158, 0.3); -fx-padding: 10 0;"/>
 
             <!-- ================= RESERVATIONS ================= -->
-            <VBox spacing="10">
-                <Label text="Réservations"
-                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <VBox spacing="15" style="
+                 -fx-background-color: rgba(255, 255, 255, 0.95);
+                 -fx-background-radius: 15;
+                 -fx-padding: 25;
+                 -fx-effect: dropshadow(gaussian, rgba(0, 11, 88, 0.3), 25, 0.2, 0, 5);
+                 -fx-border-radius: 15;
+                 -fx-border-color: #FDEB9E;
+                 -fx-border-width: 1;">
 
-                <TableView fx:id="tableReservations" prefHeight="200">
+                <Label text="Réservations"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #003161;"/>
+
+                <TableView fx:id="tableReservations" prefHeight="200" style="
+                    -fx-background-color: white;
+                    -fx-background-radius: 8;
+                    -fx-border-radius: 8;
+                    -fx-border-color: #ccc;
+                    -fx-border-width: 1.5;">
 
                     <columns>
                         <TableColumn text="ID" prefWidth="60">
@@ -154,25 +285,40 @@
                                 <PropertyValueFactory property="Description"/>
                             </cellValueFactory>
                         </TableColumn>
-
-
                     </columns>
                 </TableView>
 
-                <HBox spacing="15">
-                    <Button text="Valider"
-                            onAction="#validerReservation"
-                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"
+                <HBox spacing="15" alignment="CENTER">
+                    <Button text="Valider" onAction="#validerReservation" style="
+                        -fx-background-color: linear-gradient(to right, #4CAF50, #388E3C);
+                        -fx-text-fill: white;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 30;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(76, 175, 80, 0.4), 10, 0.3, 0, 2);"
                             prefWidth="120"/>
 
-                    <Button text="Refuser"
-                            onAction="#refuserReservation"
-                            style="-fx-background-color: #F44336; -fx-text-fill: white;"
+                    <Button text="Refuser" onAction="#refuserReservation" style="
+                        -fx-background-color: linear-gradient(to right, #F44336, #D32F2F);
+                        -fx-text-fill: white;
+                        -fx-font-weight: bold;
+                        -fx-background-radius: 8;
+                        -fx-padding: 10 30;
+                        -fx-cursor: hand;
+                        -fx-effect: dropshadow(gaussian, rgba(244, 67, 54, 0.4), 10, 0.3, 0, 2);"
                             prefWidth="120"/>
                 </HBox>
             </VBox>
-
         </VBox>
     </center>
+
+    <!-- ===== FOOTER ===== -->
+    <bottom>
+        <VBox alignment="CENTER" style="-fx-padding: 20 0;">
+            <Label text="© 2025 - Dashboard Responsable - Tous droits réservés"
+                   style="-fx-text-fill: rgba(253, 235, 158, 0.6); -fx-font-size: 12px;"/>
+        </VBox>
+    </bottom>
 
 </BorderPane>

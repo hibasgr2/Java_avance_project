@@ -1,10 +1,12 @@
 package reservation.reservation.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import jdk.jfr.Description;
 import reservation.reservation.dao.ReservationDAO;
 import reservation.reservation.model.*;
 import reservation.reservation.service.ReservationService;
@@ -23,9 +25,9 @@ public class HomeController {
     private Label userLabel;
 
     @FXML private TableView<Reservation> reservationsTable;
-    @FXML private TableColumn<Reservation, Void> actionColumn;
     @FXML private TableColumn<Reservation, EtatReservation> etatColumn;
-    @FXML private TableColumn<Reservation, Salle> salleColumn;
+    @FXML private TableColumn<Reservation, String> descriptionColumn;
+    @FXML private TableColumn<Reservation, String> TypeSalleColumn;
     @FXML private TableColumn<Reservation, LocalDateTime> dateColumn;
 
     private final ReservationDAO reservationDAO = new ReservationDAO();
@@ -41,31 +43,30 @@ public class HomeController {
                 userLabel.setText("Bienvenue " + currentClient.getNomComplet());
             }
 
-//            setupActionColumn();
-//            setupEtatColumn(EtatReservation.ANNULEE);
 
             try {
-                salleColumn.setCellValueFactory(new PropertyValueFactory<>("salle"));
-                dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-                etatColumn.setCellValueFactory(new PropertyValueFactory<>("etat"));
 
-                System.out.println(salleColumn.getText());
-                System.out.println(dateColumn.getText());
-                System.out.println(etatColumn.getText());
+                //TypeSalleColumn.setCellValueFactory(new PropertyValueFactory<>("TypeSalle"));
+                descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("Description"));
 
+                 TypeSalleColumn.setCellValueFactory(cellData ->
+                         new SimpleStringProperty(
+                                 cellData.getValue().getSalle() != null
+                                         ? cellData.getValue().getSalle().getTypeSalle()
+                                         : ""
+                         )
+                 );
+
+                dateColumn.setCellValueFactory(new PropertyValueFactory<>("DateReservation"));
+                etatColumn.setCellValueFactory(new PropertyValueFactory<>("Etat"));
+
+                loadReservations();
 
 
             } catch (RuntimeException e) {
                 throw new RuntimeException("hada howa erreur "+e.getMessage());
             }
-            // Lier les colonnes aux propriétés
 
-//            // Charger toutes les réservations au début
-//            reservationsTable.setItems(FXCollections.observableArrayList(getAllReservations()));
-
-            reservationsTable.setItems(FXCollections.observableArrayList(getAllReservations()));
-            System.out.println(reservationsTable.getItems());
-            loadReservations();
 
         } else {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Aucun client connecté.");
@@ -73,13 +74,14 @@ public class HomeController {
     }
 
     private void filterReservationsByEtat(EtatReservation etat) {
-        List<Reservation> allReservations = getAllReservations(); // ta méthode DAO/service
+        List<Reservation> allReservations = getAllReservations();
+        System.out.println(etat);// ta méthode DAO/service
         List<Reservation> filtered = allReservations.stream()
                 .filter(r -> r.getEtat() == etat)
                 .collect(Collectors.toList());
 
         reservationsTable.setItems(FXCollections.observableArrayList(filtered));
-        //System.out.println(reservationsTable.getItems());
+        System.out.println("Reservations trouvées : " + filtered.size());
     }
 
     public void showValidees(ActionEvent mouseEvent) {
@@ -96,72 +98,16 @@ public class HomeController {
 
     private List<Reservation> getAllReservations() {
         List<Reservation> reservations = reservationDAO.findByClientId(currentClient.getId());
-        System.out.println("Reservations trouvées : " + reservations.size());
+
+        System.out.println("Id"+currentClient.getId());
         return  reservations;
     }
 
     private void loadReservations() {
         List<Reservation> reservations = reservationDAO.findByClientId(currentClient.getId());
+        System.out.println("Id"+currentClient.getId());
+        System.out.println("Reservations trouvées : " + reservations.size());
         reservationsTable.setItems(FXCollections.observableArrayList(reservations));
-    }
-
-    private void setupActionColumn() {
-        actionColumn.setCellFactory(param -> new TableCell<>() {
-            private final Button cancelButton = new Button("Annuler");
-
-            {
-                cancelButton.setStyle("-fx-background-color: #c0392b; -fx-text-fill: white;");
-                cancelButton.setOnAction(event -> {
-                    Reservation reservation = getTableView().getItems().get(getIndex());
-                    handleCancel(reservation);
-                });
-            }
-
-            @Override
-            protected void updateItem(Void item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty) {
-                    setGraphic(null);
-                } else {
-                    Reservation reservation = getTableView().getItems().get(getIndex());
-                    if (reservation.getEtat() == EtatReservation.EN_ATTENTE) {
-                        setGraphic(cancelButton);
-                    } else {
-                        setGraphic(null);
-                    }
-                }
-            }
-        });
-    }
-
-    public void setupEtatColumn(EtatReservation etatReservation) {
-        etatColumn.setCellFactory(column -> new TableCell<>() {
-            @Override
-            protected void updateItem(EtatReservation item, boolean empty) {
-                super.updateItem(item, empty);
-                if (empty || item == null) {
-                    setText(null);
-                    setStyle("");
-                } else {
-                    setText(item.toString());
-                    switch (item) {
-                        case VALIDEE:
-                            setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
-                            break;
-                        case EN_ATTENTE:
-                            setStyle("-fx-text-fill: orange; -fx-font-weight: bold;");
-                            break;
-                        case ANNULEE:
-                        case REFUSEE:
-                            setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
-                            break;
-                        default:
-                            setStyle("");
-                            break;
-                    }
-                }
-            }
-        });
     }
 
     private void handleCancel(Reservation reservation) {
