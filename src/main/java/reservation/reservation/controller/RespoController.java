@@ -1,5 +1,6 @@
 package reservation.reservation.controller;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import reservation.reservation.dao.*;
@@ -9,6 +10,7 @@ import reservation.reservation.util.SessionCon;
 import java.util.List;
 
 import static reservation.reservation.model.EtatReservation.*;
+import static reservation.reservation.util.SceneManager.switchScene;
 
 public class RespoController {
 
@@ -54,6 +56,18 @@ public class RespoController {
             showAlert("Erreur", "Aucun utilisateur connecté");
             return;
         }
+
+        TableColumn<Reservation, String> nomClientCol = new TableColumn<>("Nom Client");
+        nomClientCol.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getClient().getNomComplet()));
+
+        TableColumn<Reservation, String> telClientCol = new TableColumn<>("Téléphone");
+        telClientCol.setCellValueFactory(cellData ->
+                new SimpleStringProperty(cellData.getValue().getClient().getTel()));
+
+// Ajouter les colonnes au TableView
+        tableReservations.getColumns().addAll(nomClientCol, telClientCol);
+
 
         initSalleForm();
         refreshSalles();
@@ -135,6 +149,20 @@ public class RespoController {
     }
 
     @FXML
+    private void showProfile() {
+        // Logique pour afficher le profil
+        switchScene("/reservation/Views/client/Profil.fxml", "Profil");
+
+    }
+
+    @FXML
+    private void handleLogout() {
+        switchScene("/reservation/Views/connexion.fxml", "Connexion");
+        System.out.println("Déconnexion réussie");
+
+    }
+
+    @FXML
     public void annulerEditionSalle() {
         salleEnEdition = null;
         salleFormTitle.setText("Formulaire Salle");
@@ -206,6 +234,7 @@ public class RespoController {
     }
 
     private void refreshReservations() {
+
         tableReservations.getItems().setAll(reservationDAO.getReservationsByRespo(respo.getId()));
     }
 

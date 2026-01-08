@@ -3,72 +3,75 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="reservation.reservation.controller.ReservationController"
-      prefHeight="500.0" prefWidth="600.0"
-      style="-fx-background-color: #ffffff; -fx-padding: 20;">
+      stylesheets="@/css/reservation.css"
+      spacing="20"
+      prefWidth="600"
+      style="-fx-background-color: linear-gradient(to bottom right, #FDEB9E, #006A67);">
 
-    <!-- Header -->
-    <HBox style="-fx-background-color: #000B58; -fx-background-radius: 10 10 0 0; -fx-padding: 15px;"
-          alignment="CENTER">
-        <Label text="Ajouter une demande d'une reservation"
-               style="-fx-text-fill: white; -fx-font-size: 22px; -fx-font-weight: bold;"/>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <!-- ================= HEADER ================= -->
+    <HBox alignment="CENTER" styleClass="form-header">
+        <Label text="Nouvelle demande de réservation" styleClass="header-title"/>
     </HBox>
 
-    <!-- Formulaire Réservation -->
-    <VBox spacing="20" style="-fx-background-color: #f5f5f5; -fx-background-radius: 10; -fx-padding: 30;">
+    <!-- ================= FORM CARD ================= -->
+    <VBox spacing="20" styleClass="card">
 
-        <!-- Champ Description -->
-        <VBox spacing="5">
-            <Label text="Description de la Réservation *"
-                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+        <!-- Description -->
+        <VBox spacing="6">
+            <Label text="Description *" styleClass="label"/>
             <TextArea fx:id="descriptionField"
-                       style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"
-                       promptText="Entrez description"/>
+                      promptText="Décrivez votre besoin"
+                      prefRowCount="3"
+                      styleClass="input"/>
         </VBox>
 
-        <VBox spacing="10" alignment="CENTER_LEFT">
-            <Label text="Salle :"
-                   style="-fx-font-size: 14px; -fx-text-fill: #003161; -fx-min-width: 150;"/>
+        <!-- Salle -->
+        <VBox spacing="6">
+            <Label text="Salle *" styleClass="label"/>
             <ComboBox fx:id="salleComboBox"
-                      prefWidth="300"
                       promptText="Sélectionner une salle"
-                      style="-fx-font-size: 14px;"/>
+                      styleClass="input"
+                      prefWidth="300"/>
         </VBox>
 
-        <!-- Champ Date de réservation -->
-        <VBox spacing="5">
-            <Label text="Date de Réservation *"
-                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
-            <DatePicker fx:id="datePicker"
-                        style="-fx-background-color: white; -fx-border-color: #006A67; -fx-border-radius: 5; -fx-border-width: 2; -fx-padding: 10; -fx-font-size: 14px;"/>
+        <!-- Date -->
+        <VBox spacing="6">
+            <Label text="Date de réservation *" styleClass="label"/>
+            <DatePicker fx:id="datePicker" styleClass="input"/>
         </VBox>
 
-        <!-- Boutons d'action -->
-        <HBox spacing="15" style="-fx-padding: 20 0 0 0;" alignment="CENTER_RIGHT">
+        <!-- Buttons -->
+        <HBox spacing="15" alignment="CENTER_RIGHT">
             <Button text="Annuler"
-                    style="-fx-background-color: #cccccc; -fx-text-fill: #333333; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 20; -fx-background-radius: 5;"
-                    onAction="#cancelReservation"/>
-            <Button text="Ajouter Réservation"
-                    style="-fx-background-color: #006A67; -fx-text-fill: white; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 25; -fx-background-radius: 5;"
-                    onAction="#addReservation"/>
+                    onAction="#cancelReservation"
+                    styleClass="btn-cancel"/>
+            <Button text="Ajouter"
+                    onAction="#addReservation"
+                    styleClass="btn-primary"/>
         </HBox>
 
-        <!-- Message d'information -->
-        <VBox style="-fx-background-color: #FDEB9E; -fx-background-radius: 5; -fx-padding: 10; -fx-margin: 10 0 0 0;">
-            <Label text="Information"
-                   style="-fx-text-fill: #003161; -fx-font-size: 14px; -fx-font-weight: bold;"/>
-            <Label text="Tous les champs marqués d'un astérisque (*) sont obligatoires."
-                   style="-fx-text-fill: #003161; -fx-font-size: 13px; -fx-wrap-text: true;"/>
+        <!-- Info -->
+        <VBox spacing="5" styleClass="info-box">
+            <Label text="ℹ Information" styleClass="info-title"/>
+            <Label text="Tous les champs marqués par * sont obligatoires."
+                   styleClass="info-text"
+                   wrapText="true"/>
         </VBox>
 
     </VBox>
 
-    <!-- Footer -->
-    <HBox style="-fx-padding: 15 0 0 0;" alignment="CENTER">
-        <Label text="Super User Panel" style="-fx-text-fill: #003161; -fx-font-size: 12px; -fx-opacity: 0.7;"/>
+    <!-- ================= FOOTER ================= -->
+    <HBox alignment="CENTER">
+        <Label text="Reservation System"
+               style="-fx-text-fill: #003161; -fx-opacity: 0.6;"/>
     </HBox>
+
 </VBox>

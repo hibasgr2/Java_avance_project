@@ -1,70 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="reservation.reservation.controller.HomeController"
-            style="-fx-background-color: #FDEB9E;">
+            stylesheets="@/css/home.css"
+            style="-fx-background-color: linear-gradient(to bottom right, #FDEB9E, #006A67);">
 
-    <!-- NAVBAR -->
+    <!-- ================= NAVBAR ================= -->
     <top>
-        <HBox spacing="20" style="-fx-background-color:#000B58;">
-            <padding>
-                <Insets top="15" right="20" bottom="15" left="20"/>
-            </padding>
-
-            <Label text="LOGO" style="-fx-text-fill:#FDEB9E; -fx-font-size:18px;"/>
+        <HBox spacing="20" styleClass="navbar">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Circle radius="14" fill="#FDEB9E"/>
+                <Label text="ReservationApp" styleClass="logo"/>
+            </HBox>
 
             <Pane HBox.hgrow="ALWAYS"/>
 
-            <Button onAction="#showProfile" text="Profil"/>
-            <Button onAction="#handleLogout" text="Déconnexion"/>
+            <HBox spacing="15">
+                <Button text="Profil" onAction="#showProfile" styleClass="nav-button"/>
+                <Button text="Déconnexion" onAction="#handleLogout" styleClass="nav-button"/>
+            </HBox>
         </HBox>
     </top>
 
-    <!-- BODY -->
+    <!-- ================= BODY ================= -->
     <center>
         <HBox spacing="30">
             <padding>
-                <Insets top="20" right="20" bottom="20" left="20"/>
+                <Insets top="30" right="30" bottom="30" left="30"/>
             </padding>
 
-            <!-- LEFT -->
-            <VBox spacing="15"
-                  prefWidth="500"
-                  HBox.hgrow="ALWAYS">
+            <!-- ===== LEFT PANEL ===== -->
+            <VBox spacing="20" prefWidth="650" HBox.hgrow="ALWAYS" styleClass="card">
 
-                <Label fx:id="userLabel"
-                       text="Vous êtes connecté : User"
-                       style="-fx-font-size:16px; -fx-font-weight:bold;"/>
-
+                <!-- USER HEADER -->
                 <HBox spacing="15">
-                    <Button text="Validee" onAction="#showValidees"/>
-                    <Button text="En attente" onAction="#showAttente"/>
-                    <Button text="Rejetee" onAction="#showRejetees"/>
+                    <Circle radius="25" fill="linear-gradient(to bottom right, #006A67, #003161)"/>
+                    <VBox>
+                        <Label fx:id="userLabel" text="Bienvenue, User" styleClass="title"/>
+                        <Label text="Tableau des réservations" styleClass="subtitle"/>
+                    </VBox>
                 </HBox>
 
+                <!-- FILTER BUTTONS -->
+                <HBox spacing="15">
+                    <Button text="Validées" onAction="#showValidees" styleClass="filter-btn"/>
+                    <Button text="En attente" onAction="#showAttente" styleClass="filter-btn"/>
+                    <Button text="Rejetées" onAction="#showRejetees" styleClass="filter-btn"/>
+                </HBox>
+
+                <!-- TABLE -->
+<!--                <TableView fx:id="reservationsTable" VBox.vgrow="ALWAYS">-->
+<!--                    <columns>-->
+<!--                        <TableColumn fx:id="dateColumn" text="Date"/>-->
+<!--                        <TableColumn fx:id="etatColumn" text="État"/>-->
+<!--                        <TableColumn fx:id="TypeSalleColumn" text="Type de salle"/>-->
+<!--                        <TableColumn fx:id="descriptionColumn" text="Description"/>-->
+<!--                    </columns>-->
+<!--                </TableView>-->
                 <TableView fx:id="reservationsTable"
                            VBox.vgrow="ALWAYS"
-                           prefHeight="300">
+                           styleClass="modern-table">
+
                     <columns>
-<!--                        <TableColumn fx:id="salleColumn" text="Salle"/>-->
-                        <TableColumn fx:id="dateColumn" text="DateReservation"/>
-                        <TableColumn fx:id="etatColumn" text="Etat"/>
-                        <TableColumn fx:id="TypeSalleColumn" text="TypeSalle"/>
-                        <TableColumn fx:id="descriptionColumn" text="Description"/>
+                        <TableColumn fx:id="dateColumn" text="📅 Date" />
+                        <TableColumn fx:id="etatColumn" text="🔄 État" />
+                        <TableColumn fx:id="TypeSalleColumn" text="🏢 Type de salle" />
+                        <TableColumn fx:id="descriptionColumn" text="📝 Description" />
                     </columns>
+
                 </TableView>
 
+
             </VBox>
 
-            <!-- RIGHT -->
-            <VBox spacing="20" prefWidth="300">
-                <Button text="➕ Ajouter réservation"
-                        onAction="#AddResrvation"/>
-            </VBox>
+            <!-- ===== RIGHT PANEL ===== -->
+            <VBox spacing="25" prefWidth="320">
 
+                <!-- ADD CARD -->
+                <VBox spacing="15" alignment="CENTER" styleClass="card">
+                    <Circle radius="38" fill="linear-gradient(to bottom right, #000B58, #006A67)"/>
+                    <Label text="Nouvelle réservation" styleClass="title"/>
+                    <Label text="Créer une nouvelle demande de réservation"
+                           styleClass="subtitle"
+                           wrapText="true"/>
+                    <Button text="➕ Ajouter réservation"
+                            onAction="#AddResrvation"
+                            styleClass="primary-btn"/>
+                </VBox>
+
+            </VBox>
         </HBox>
     </center>
 

@@ -1,62 +1,160 @@
+/* ========== GLOBAL ========== */
 .root {
     -fx-font-family: "Segoe UI";
-    -fx-background-color: #FDEB9E;
 }
 
-/* NAVBAR */
+/* ========== NAVBAR ========== */
 .navbar {
-    -fx-background-color: #000B58;
+    -fx-background-color: linear-gradient(to right, #000B58, #003161);
+    -fx-padding: 15 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 12, 0, 0, 3);
 }
 
 .logo {
     -fx-text-fill: #FDEB9E;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
 }
 
-.nav-btn {
-    -fx-background-color: #003161;
-    -fx-text-fill: white;
+.nav-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FDEB9E;
+    -fx-border-color: #FDEB9E;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+    -fx-padding: 8 22;
+    -fx-font-weight: bold;
 }
 
-.logout-btn {
-    -fx-background-color: #006A67;
-    -fx-text-fill: white;
+.nav-button:hover {
+    -fx-background-color: #FDEB9E;
+    -fx-text-fill: #000B58;
 }
 
-/* CARDS */
+/* ========== CARDS ========== */
 .card {
     -fx-background-color: white;
-    -fx-padding: 15;
-    -fx-background-radius: 10;
+    -fx-background-radius: 16;
+    -fx-padding: 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 18, 0, 0, 6);
 }
 
+/* ========== TEXT ========== */
 .title {
-    -fx-font-size: 14px;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
     -fx-text-fill: #003161;
 }
 
-.username {
-    -fx-font-size: 18px;
+.subtitle {
+    -fx-font-size: 13px;
+    -fx-text-fill: #666;
+}
+
+/* ========== BUTTONS ========== */
+.primary-btn {
+    -fx-background-color: linear-gradient(to right, #000B58, #003161);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 25;
+    -fx-padding: 12 30;
+}
+
+.primary-btn:hover {
+    -fx-background-color: linear-gradient(to right, #006A67, #003161);
+}
+
+.filter-btn {
+    -fx-background-color: #006A67;
+    -fx-text-fill: white;
+    -fx-background-radius: 12;
+    -fx-padding: 10 22;
     -fx-font-weight: bold;
 }
 
-/* STATS */
-.stat-card {
+.filter-btn:hover {
     -fx-background-color: #003161;
-    -fx-padding: 15;
-    -fx-background-radius: 10;
-    -fx-alignment: center;
-    -fx-cursor: hand;
 }
 
-.stat-card Label {
-    -fx-text-fill: white;
+/* ========== TABLE ========== */
+/* TABLE GENERALE */
+.modern-table {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+    -fx-padding: 8;
 }
 
-/* BUTTON */
-.add-btn {
+/* EN-TÊTES */
+.modern-table .column-header-background {
     -fx-background-color: #006A67;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.modern-table .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.modern-table .column-header .label {
     -fx-text-fill: white;
-    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+/* LIGNES */
+.modern-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent transparent #f0f0f0 transparent;
+}
+
+.modern-table .table-row-cell:hover {
+    -fx-background-color: #f5f7ff;
+}
+
+.modern-table .table-row-cell:selected {
+    -fx-background-color: #e0e7ff;
+}
+
+/* CELLULES */
+.modern-table .table-cell {
+    -fx-padding: 10;
+    -fx-font-size: 12px;
+}
+
+
+
+/* ========== STATS ========== */
+.stat {
+    -fx-background-radius: 12;
+    -fx-padding: 15;
+    -fx-pref-width: 90;
+}
+
+.stat-yellow {
+    -fx-background-color: #FDEB9E;
+}
+
+.stat-green {
+    -fx-background-color: #006A67;
+}
+
+.stat-blue {
+    -fx-background-color: #003161;
+}
+
+.stat-number {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000B58;
+}
+
+.stat-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #000B58;
+}
+
+.white {
+    -fx-text-fill: white;
 }

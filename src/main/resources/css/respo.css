@@ -1,0 +1,96 @@
+/* ===== ROOT ===== */
+.root {
+    -fx-font-family: "Segoe UI", "Inter", sans-serif;
+}
+
+/* ===== HEADER ===== */
+.header-title {
+    -fx-text-fill: #FDEB9E;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.header-subtitle {
+    -fx-text-fill: rgba(253,235,158,0.75);
+    -fx-font-size: 14px;
+}
+
+/* ===== CARDS ===== */
+.card {
+    -fx-background-color: rgba(255,255,255,0.96);
+    -fx-background-radius: 16;
+    -fx-padding: 25;
+    -fx-border-radius: 16;
+    -fx-border-color: #FDEB9E;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 25, 0.15, 0, 6);
+}
+
+.card-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #003161;
+}
+
+/* ===== TABLE ===== */
+.modern-table {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+}
+
+.modern-table .column-header-background {
+    -fx-background-color: linear-gradient(to right, #003161, #006A67);
+    -fx-background-radius: 12 12 0 0;
+}
+
+.modern-table .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.modern-table .table-row-cell:hover {
+    -fx-background-color: #f4f7ff;
+}
+
+.modern-table .table-row-cell:selected {
+    -fx-background-color: #e0e7ff;
+}
+
+/* ===== BUTTONS ===== */
+.btn-primary {
+    -fx-background-color: linear-gradient(to right, #006A67, #003161);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 10 22;
+    -fx-cursor: hand;
+}
+
+.btn-warning {
+    -fx-background-color: linear-gradient(to right, #FFC107, #FF9800);
+    -fx-text-fill: #003161;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+}
+
+.btn-danger {
+    -fx-background-color: linear-gradient(to right, #F44336, #D32F2F);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+}
+
+.btn-success {
+    -fx-background-color: linear-gradient(to right, #4CAF50, #388E3C);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+}
+
+/* ===== FOOTER ===== */
+.footer-text {
+    -fx-text-fill: rgba(253,235,158,0.6);
+    -fx-font-size: 12px;
+}

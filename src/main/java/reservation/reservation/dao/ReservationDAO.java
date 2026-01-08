@@ -11,7 +11,7 @@ public class ReservationDAO {
     public List<Reservation> getReservationsByRespo(Long respoId) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Reservation> reservations = session.createQuery(
-                        "FROM Reservation r WHERE r.respo.id = :id", Reservation.class)
+                        "FROM Reservation r JOIN FETCH r.client WHERE r.respo.id = :id", Reservation.class)
                 .setParameter("id", respoId)
                 .getResultList();
         session.close();
